@@ -7,6 +7,8 @@
 
 import CoreBase
 import UIKit
+import Found
+import Factory
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -26,12 +28,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     vc.view.backgroundColor = .red
     window?.rootViewController = vc
 
-    let res = withValue(
-      withValue(getValue()) { $0 }
-    ) {
-      $0 > 100 ? "\($0)" : "bbb"
-    }
-    print(res)
+//    let res = withValue(
+//      withValue(getValue()) { $0 }
+//    ) {
+//      $0 > 100 ? "\($0)" : "bbb"
+//    }
+//    print(res)
+
+    let s = Container.shared.service()
+    print(s)
   }
 
   func getValue() -> Int {

@@ -1,0 +1,45 @@
+{
+  "configurations" : [
+    {
+      "id" : "238494B9-FA0E-447F-B4DC-540D8B2D1A86",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:frex.xcodeproj",
+      "identifier" : "0A4133992F2C8A4500F1F8FC",
+      "name" : "frex"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Packages\/Found",
+        "identifier" : "FoundTests",
+        "name" : "FoundTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:frex.xcodeproj",
+        "identifier" : "0A5CCD5D2F32099F00C0E03D",
+        "name" : "frexTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:frex.xcodeproj",
+        "identifier" : "0A4134452F2C8E3100F1F8FC",
+        "name" : "CoreBaseTests"
+      }
+    }
+  ],
+  "version" : 1
+}

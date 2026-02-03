@@ -10,7 +10,7 @@ import Testing
 
 struct CoreBaseTests {
 
-    @Test func example() async throws {
+    @Test func testInCoreBase() async throws {
         // Write your test here and use APIs like `#expect(...)` to check expected conditions.
     }
 
