@@ -25,6 +25,7 @@
 		0A5C0D342F331CEC009DA6F1 /* Exceptions for "modules" folder in "frex" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Auth,
 				CoreBase,
 			);
 			target = 0A5C0C462F3300E6009DA6F1 /* frex */;
