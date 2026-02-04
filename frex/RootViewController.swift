@@ -17,8 +17,4 @@ class RootViewController: UIViewController {
     from_core()
   }
 
-  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-    super.touchesEnded(touches, with: event)
-  }
-
 }

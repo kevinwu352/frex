@@ -4,23 +4,32 @@
 import PackageDescription
 
 let package = Package(
-    name: "CoreBase",
-    products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
-        .library(
-            name: "CoreBase",
-            targets: ["CoreBase"]
-        ),
-    ],
-    targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
-        .target(
-            name: "CoreBase"
-        ),
-        .testTarget(
-            name: "CoreBaseTests",
-            dependencies: ["CoreBase"]
-        ),
-    ]
+  name: "CoreBase",
+  defaultLocalization: "en",
+  platforms: [
+    .iOS(.v17),
+  ],
+  products: [
+    .library(
+      name: "CoreBase",
+      targets: ["CoreBase"]
+    ),
+  ],
+  dependencies: [
+    .package(url: "https://github.com/SimplyDanny/SwiftLintPlugins.git", from: "0.63.0"),
+    .package(url: "https://github.com/hmlongco/Factory.git", from: "2.5.0"),
+  ],
+  targets: [
+    .target(
+      name: "CoreBase",
+      dependencies: [
+        .product(name: "Factory", package: "Factory"),
+      ],
+      plugins: [.plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLintPlugins")]
+    ),
+    .testTarget(
+      name: "CoreBaseTests",
+      dependencies: ["CoreBase"]
+    ),
+  ]
 )
