@@ -1,3 +1,4 @@
 identifier_name:
   min_length: 3
   excluded: [i, j, n, m, id, vm]
+line_length: 140
