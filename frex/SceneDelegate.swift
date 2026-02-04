@@ -18,9 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     print("scene will connect to session, window:\(window == nil ? "nil" : "some")")
     guard let scene = scene as? UIWindowScene else { return }
     window = UIWindow(windowScene: scene)
-    let vc = UIViewController()
-    vc.view.backgroundColor = .systemTeal
-    window?.rootViewController = vc
+    window?.rootViewController = RootViewController()
     window?.makeKeyAndVisible()
   }
 

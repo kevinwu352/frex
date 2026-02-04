@@ -18,6 +18,13 @@
 			);
 			target = 0A5C0C462F3300E6009DA6F1 /* frex */;
 		};
+		0A5C0D342F331CEC009DA6F1 /* Exceptions for "modules" folder in "frex" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				CoreBase,
+			);
+			target = 0A5C0C462F3300E6009DA6F1 /* frex */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -27,6 +34,14 @@
 				0A5C0C592F3300E7009DA6F1 /* Exceptions for "frex" folder in "frex" target */,
 			);
 			path = frex;
+			sourceTree = "<group>";
+		};
+		0A5C0D322F331CAA009DA6F1 /* modules */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				0A5C0D342F331CEC009DA6F1 /* Exceptions for "modules" folder in "frex" target */,
+			);
+			path = modules;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -46,6 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				0A5C0C492F3300E6009DA6F1 /* frex */,
+				0A5C0D322F331CAA009DA6F1 /* modules */,
 				0A5C0C482F3300E6009DA6F1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -75,6 +91,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				0A5C0C492F3300E6009DA6F1 /* frex */,
+				0A5C0D322F331CAA009DA6F1 /* modules */,
 			);
 			name = frex;
 			packageProductDependencies = (
