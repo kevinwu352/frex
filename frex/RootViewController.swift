@@ -6,12 +6,15 @@
 //
 
 import UIKit
+import CoreBase
 
 class RootViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .systemTeal
+
+    from_core()
   }
 
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

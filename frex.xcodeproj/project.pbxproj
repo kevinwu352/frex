@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		0A5C0DAA2F333BB8009DA6F1 /* CoreBase in Frameworks */ = {isa = PBXBuildFile; productRef = 0A5C0DA92F333BB8009DA6F1 /* CoreBase */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		0A5C0C472F3300E6009DA6F1 /* frex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = frex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -51,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A5C0DAA2F333BB8009DA6F1 /* CoreBase in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +67,7 @@
 			children = (
 				0A5C0C492F3300E6009DA6F1 /* frex */,
 				0A5C0D322F331CAA009DA6F1 /* modules */,
+				0A5C0DA82F333BB8009DA6F1 /* Frameworks */,
 				0A5C0C482F3300E6009DA6F1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -72,6 +78,13 @@
 				0A5C0C472F3300E6009DA6F1 /* frex.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		0A5C0DA82F333BB8009DA6F1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -95,6 +108,7 @@
 			);
 			name = frex;
 			packageProductDependencies = (
+				0A5C0DA92F333BB8009DA6F1 /* CoreBase */,
 			);
 			productName = frex;
 			productReference = 0A5C0C472F3300E6009DA6F1 /* frex.app */;
@@ -357,6 +371,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0A5C0DA92F333BB8009DA6F1 /* CoreBase */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CoreBase;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0A5C0C3F2F3300E6009DA6F1 /* Project object */;
 }
