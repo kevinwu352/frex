@@ -7,27 +7,31 @@
 
 import Foundation
 
+// Double(10) / Int(1.2)
+// String(10) / Int("10")
+// String(format: "%f", 1.2) / Double("1.2")
+
 // Data - String
-public extension Data {
-  var utf8str: String { String(decoding: self, as: UTF8.self) }
+extension Data {
+  public var utf8str: String { String(data: self, encoding: .utf8) ?? "" }
 }
-public extension String {
-  var utf8dat: Data { Data(utf8) }
+extension String {
+  public var utf8dat: Data { Data(utf8) }
 }
 
 // HexData - String
-public extension Data {
-  var hexstr: String {
+extension Data {
+  public var hexstr: String {
     map { String(format: "%02x", $0) }
       .joined(separator: "")
   }
 }
-public extension String {
-  var hexdat: Data? {
-    assert(count%2 == 0, "`count` should not be odd")
+extension String {
+  public var hexdat: Data? {
+    assert(count % 2 == 0, "`count` should not be odd")
     var data = Data()
-    for i in 0..<count/2 {
-      let beg = index(startIndex, offsetBy: i*2)
+    for i in 0..<count / 2 {
+      let beg = index(startIndex, offsetBy: i * 2)
       let end = index(beg, offsetBy: 2)
       let byte = self[beg..<end]
       if var num = UInt8(byte, radix: 16) {

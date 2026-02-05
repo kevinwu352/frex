@@ -15,13 +15,13 @@ public var kKeyWindow: UIWindow? {
     .flatMap { $0.windows }
     .first { $0.isKeyWindow }
 }
-//public var MODALTOP: UIViewController? {
-//  var ret = WINDOW?.rootViewController
-//  while let vc = ret?.presentedViewController {
-//    ret = vc
-//  }
-//  return ret
-//}
+// public var MODALTOP: UIViewController? {
+//   var ret = WINDOW?.rootViewController
+//   while let vc = ret?.presentedViewController {
+//     ret = vc
+//   }
+//   return ret
+// }
 
 @MainActor public let kScreenW = Double(UIScreen.main.bounds.width)
 @MainActor public let kScreenH = Double(UIScreen.main.bounds.height)

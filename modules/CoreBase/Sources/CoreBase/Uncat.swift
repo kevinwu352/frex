@@ -7,26 +7,25 @@
 
 import Foundation
 
-public func withValue<T1, T2>(_ v: T1, _ h: (T1) -> T2) -> T2 {
-  h(v)
+public func withValue<T1, T2>(_ value: T1, _ handler: (T1) -> T2) -> T2 {
+  handler(value)
 }
 
-
-public extension Result {
-  var isSuccess: Bool {
-    if case .success = self { return true } else { return false }
+extension Result {
+  public var isSuccess: Bool {
+    if case .success = self { true } else { false }
   }
-  var isFailure: Bool {
-    if case .failure = self { return true } else { return false }
+  public var isFailure: Bool {
+    if case .failure = self { true } else { false }
   }
 }
+// (200..<300).contains((obj as? HTTPURLResponse)?.statusCode ?? 0)
 
-
-public extension Bundle {
-  var versionNumber: String? {
+extension Bundle {
+  public var versionNumber: String? {
     infoDictionary?["CFBundleShortVersionString"] as? String
   }
-  var buildNumber: String? {
+  public var buildNumber: String? {
     infoDictionary?["CFBundleVersion"] as? String
   }
 }

@@ -14,7 +14,6 @@ class RootViewController: UIViewController {
     super.viewDidLoad()
     view.backgroundColor = .systemTeal
 
-    from_core()
   }
 
 }

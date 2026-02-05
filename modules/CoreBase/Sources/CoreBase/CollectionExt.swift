@@ -7,11 +7,11 @@
 
 import Foundation
 
-public extension Collection {
+extension Collection {
 
-  var notEmpty: Bool { !isEmpty }
+  public var notEmpty: Bool { !isEmpty }
 
-  func at(_ i: Index) -> Element? {
+  public func at(_ i: Index) -> Element? {
     indices.contains(i) ? self[i] : nil
   }
 
