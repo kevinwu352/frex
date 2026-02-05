@@ -25,7 +25,8 @@ let package = Package(
       dependencies: [
         .product(name: "Factory", package: "Factory"),
       ],
-      plugins: [.plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLintPlugins")]
+      // swiftSettings: [.defaultIsolation(MainActor.self)],
+      plugins: [.plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLintPlugins")],
     ),
     .testTarget(
       name: "CoreBaseTests",
