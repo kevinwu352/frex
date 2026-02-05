@@ -8,8 +8,8 @@
 import Foundation
 import Factory
 
-public extension Scope {
-  static let session = Cached()
+extension Scope {
+  public static let session = Cached()
 }
 
 // public extension Container {

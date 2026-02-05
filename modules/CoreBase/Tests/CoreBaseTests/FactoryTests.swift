@@ -6,6 +6,7 @@
 //
 
 import Testing
+@testable import CoreBase
 import Factory
 
 extension Container {
