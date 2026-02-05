@@ -8,10 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		0A5C0DAA2F333BB8009DA6F1 /* CoreBase in Frameworks */ = {isa = PBXBuildFile; productRef = 0A5C0DA92F333BB8009DA6F1 /* CoreBase */; };
+		0A90320B2F33878E00B9A49A /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = 0A90320A2F33878E00B9A49A /* Auth */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0A5C0C472F3300E6009DA6F1 /* frex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = frex.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0AEB87962F34311D0072CAA7 /* frex.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = frex.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -56,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A90320B2F33878E00B9A49A /* Auth in Frameworks */,
 				0A5C0DAA2F333BB8009DA6F1 /* CoreBase in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -66,6 +69,7 @@
 		0A5C0C3E2F3300E6009DA6F1 = {
 			isa = PBXGroup;
 			children = (
+				0AEB87962F34311D0072CAA7 /* frex.xctestplan */,
 				0A5C0C492F3300E6009DA6F1 /* frex */,
 				0A5C0D322F331CAA009DA6F1 /* modules */,
 				0A5C0DA82F333BB8009DA6F1 /* Frameworks */,
@@ -111,6 +115,7 @@
 			name = frex;
 			packageProductDependencies = (
 				0A5C0DA92F333BB8009DA6F1 /* CoreBase */,
+				0A90320A2F33878E00B9A49A /* Auth */,
 			);
 			productName = frex;
 			productReference = 0A5C0C472F3300E6009DA6F1 /* frex.app */;
@@ -404,6 +409,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0A9032062F33808000B9A49A /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */;
 			productName = "plugin:SwiftLintBuildToolPlugin";
+		};
+		0A90320A2F33878E00B9A49A /* Auth */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Auth;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

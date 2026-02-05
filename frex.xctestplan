@@ -1,0 +1,37 @@
+{
+  "configurations" : [
+    {
+      "id" : "005AB32C-F76B-4232-AB17-E7EDF1FB395D",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:frex.xcodeproj",
+      "identifier" : "0A5C0C462F3300E6009DA6F1",
+      "name" : "frex"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:modules\/Auth",
+        "identifier" : "AuthTests",
+        "name" : "AuthTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:modules\/CoreBase",
+        "identifier" : "CoreBaseTests",
+        "name" : "CoreBaseTests"
+      }
+    }
+  ],
+  "version" : 1
+}
