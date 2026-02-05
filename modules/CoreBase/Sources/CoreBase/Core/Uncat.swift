@@ -7,7 +7,8 @@
 
 import Foundation
 
-public func withValue<T1, T2>(_ value: T1, _ handler: (T1) -> T2) -> T2 {
+// let res = withValue(withValue(1) { $0 > 0 ? 1 : -1 }) { $0 > 0 ? "aa" : "bb" }
+public func withValue<T1, T2>(_ value: T1, handler: (T1) -> T2) -> T2 {
   handler(value)
 }
 

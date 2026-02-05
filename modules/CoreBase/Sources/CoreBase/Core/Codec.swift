@@ -7,8 +7,8 @@
 
 import Foundation
 
-public func pathmk(_ trail: String, uid: String = "", dir: FileManager.SearchPathDirectory = .documentDirectory) -> String {
-  (NSSearchPathForDirectoriesInDomains(dir, .userDomainMask, true).first ?? "")
+public func pathmk(_ trail: String, uid: String = "") -> String {
+  (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first ?? "")
     .addedPathSeg(uid.isEmpty ? "" : ["Users", uid].joined(separator: "/"))
     .addedPathSeg(trail)
 }
@@ -57,7 +57,7 @@ public func data_read(_ path: String?) -> Data? {
   guard let path, !path.isEmpty else { return nil }
   return try? Data(contentsOf: URL(fileURLWithPath: path))
 }
-public func data_write(_ data: Data?, _ path: String?) {
+public func data_write(_ path: String?, data: Data?) {
   guard let path, !path.isEmpty else { return }
   let dir = (path as NSString).deletingLastPathComponent
   if !FileManager.default.fileExists(atPath: dir, isDirectory: nil) {
