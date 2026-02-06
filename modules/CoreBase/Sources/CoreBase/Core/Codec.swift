@@ -24,7 +24,6 @@ extension String {
     }
   }
 }
-
 public func pathCreateDir(_ path: String?) throws {
   guard let path, !path.isEmpty else { return }
   if !FileManager.default.fileExists(atPath: path, isDirectory: nil) {
@@ -46,11 +45,6 @@ public func pathDelete(_ path: String?) throws {
   try FileManager.default.removeItem(atPath: path)
 }
 
-// null
-// bool/int/double
-// string
-// array
-// object
 public func dataRead(_ path: String?) throws -> Data? {
   guard let path, !path.isEmpty else { return nil }
   return try Data(contentsOf: URL(fileURLWithPath: path))
@@ -64,6 +58,11 @@ public func dataWrite(_ path: String?, data: Data?) throws {
   try data?.write(to: URL(fileURLWithPath: path))
 }
 
+// null
+// bool/int/double
+// string
+// array
+// object
 public func jsonEncode(_ json: Any?, options: JSONSerialization.WritingOptions = []) throws -> Data? {
   guard let json, JSONSerialization.isValidJSONObject(json) else { return nil }
   return try JSONSerialization.data(withJSONObject: json, options: options)
@@ -73,51 +72,30 @@ public func jsonDecode(_ data: Data?, options: JSONSerialization.ReadingOptions 
   return jsonStandardize(try JSONSerialization.jsonObject(with: data, options: options))
 }
 public func jsonStandardize(_ json: Any?) -> Any? {
-  if let array = json as? [Any] {
-    return array.compactMap { jsonStandardize($0) }
+  if json is NSNull {
+    return nil
+  } else if let array = json as? [Any] {
+    return array.map { jsonStandardize($0) }
   } else if let object = json as? [String: Any] {
-    return object.compactMapValues { jsonStandardize($0) }
+    return object.mapValues { jsonStandardize($0) }
   } else if let number = json as? NSNumber {
-    if number.isBool {
+    if CFGetTypeID(number) == CFBooleanGetTypeID() {
       return json as? Bool
-    } else if number.isInt {
+    } else if [
+      CFNumberType.sInt8Type, .sInt16Type, .sInt32Type, .sInt64Type,
+      .intType, .longType, .longLongType,
+      .charType, .shortType, .nsIntegerType,
+    ].contains(CFNumberGetType(number)) {
       return json as? Int
-    } else if number.isDouble {
+    } else if [
+      CFNumberType.float32Type, .float64Type,
+      .floatType, .doubleType,
+      .cgFloatType,
+    ].contains(CFNumberGetType(number)) {
       return json as? Double
     }
   } else if let string = json as? String {
     return string
   }
   return nil
-}
-// bool as NSNumber   : is bool/int
-// int as NSNumber    : is int
-// double as NSNumber : is double
-extension NSNumber {
-  fileprivate var isBool: Bool {
-    CFGetTypeID(self) == CFBooleanGetTypeID()
-  }
-  fileprivate var isInt: Bool {
-    [
-      CFNumberType.sInt8Type,
-      CFNumberType.sInt16Type,
-      CFNumberType.sInt32Type,
-      CFNumberType.sInt64Type,
-      CFNumberType.intType,
-      CFNumberType.longType,
-      CFNumberType.longLongType,
-      CFNumberType.nsIntegerType,
-      CFNumberType.charType,
-      CFNumberType.shortType,
-    ].contains(CFNumberGetType(self))
-  }
-  fileprivate var isDouble: Bool {
-    [
-      CFNumberType.float32Type,
-      CFNumberType.float64Type,
-      CFNumberType.floatType,
-      CFNumberType.doubleType,
-      CFNumberType.cgFloatType,
-    ].contains(CFNumberGetType(self))
-  }
 }
