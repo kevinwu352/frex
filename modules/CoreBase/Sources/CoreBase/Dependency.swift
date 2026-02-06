@@ -8,6 +8,11 @@
 import Foundation
 import Factory
 
+// singleton
+// graph
+// unique / shared / cached
+
+// self { Router() }.scope(.session)
 extension Scope {
   public static let session = Cached()
 }
