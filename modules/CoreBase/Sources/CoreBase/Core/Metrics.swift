@@ -1,37 +1,57 @@
 //
 //  Metrics.swift
-//  frex
+//  CoreBase
 //
 //  Created by Kevin Wu on 2/1/26.
 //
 
 import UIKit
 
-// TODO
-@MainActor
-public var kKeyWindow: UIWindow? {
+// should be valid after UIWindow(windowScene: scene) in SceneDelegate
+@MainActor public var mainWindow: UIWindow? {
   UIApplication.shared.connectedScenes
     .compactMap { $0 as? UIWindowScene }
     .flatMap { $0.windows }
-    .first { $0.isKeyWindow }
+    .sorted { !$1.isKeyWindow }
+    .first
 }
-// public var MODALTOP: UIViewController? {
-//   var ret = WINDOW?.rootViewController
-//   while let vc = ret?.presentedViewController {
-//     ret = vc
-//   }
-//   return ret
-// }
+@MainActor public var modalTop: UIViewController? {
+  var ret = mainWindow?.rootViewController
+  while let vc = ret?.presentedViewController {
+    ret = vc
+  }
+  return ret
+}
 
-@MainActor public let kScreenW = Double(UIScreen.main.bounds.width)
-@MainActor public let kScreenH = Double(UIScreen.main.bounds.height)
+@MainActor public let screenWidth: Double = {
+  let ret = UIScreen.main.bounds.width
+  assert(ret > 0, "`screenWidth` invalid")
+  return ret
+}()
+@MainActor public let screenHeight: Double = {
+  let ret = UIScreen.main.bounds.height
+  assert(ret > 0, "`screenHeight` invalid")
+  return ret
+}()
 
-@MainActor public let kSafeTop = Double(kKeyWindow?.safeAreaInsets.top ?? 0.0)
-@MainActor public let kSafeBot = Double(kKeyWindow?.safeAreaInsets.bottom ?? 0.0)
+@MainActor public let safeTop: Double = {
+  let ret = mainWindow?.safeAreaInsets.top ?? 0
+  assert(ret > 0, "`safeTop` invalid")
+  return ret
+}()
+@MainActor public let safeBot: Double = {
+  let ret = mainWindow?.safeAreaInsets.bottom ?? 0
+  assert(ret > 0, "`safeBot` invalid")
+  return ret
+}()
 
-@MainActor public let kStatusBarH = kSafeBot > 0 ? kSafeTop : 20.0
-public let kNavBarH = 44.0
-public let kTabBarH = 49.0
+@MainActor public let statusBarHeight: Double = {
+  let ret = safeBot > 0 ? safeTop : 20
+  assert(ret > 0, "`statusBarHeight` invalid")
+  return ret
+}()
+public let navBarHeight = 44.0
+public let tabBarHeight = 49.0
 
-@MainActor public let kTopH = kStatusBarH + kNavBarH
-@MainActor public let kBotH = kSafeBot + kTabBarH
+@MainActor public let topHeight = statusBarHeight + navBarHeight
+@MainActor public let botHeight = safeBot + tabBarHeight

@@ -43,6 +43,33 @@ extension Date {
       return nil
     }
   }
+
+  public var start: Date {
+    Calendar.current.startOfDay(for: self)
+  }
+  public var yesterday: Date {
+    Date(timeIntervalSince1970: timeIntervalSince1970 - 86400)
+  }
+  public var tomorrow: Date {
+    Date(timeIntervalSince1970: timeIntervalSince1970 + 86400)
+  }
+  public func added(_ seconds: Double) -> Date {
+    Date(timeIntervalSince1970: timeIntervalSince1970 + seconds)
+  }
+
+  public var isToday: Bool {
+    Calendar.current.isDateInToday(self)
+  }
+  public var isYesterday: Bool {
+    Calendar.current.isDateInYesterday(self)
+  }
+  public var isTomorrow: Bool {
+    Calendar.current.isDateInTomorrow(self)
+  }
+  public func isSameDay(_ date: Date?) -> Bool {
+    guard let date = date else { return false }
+    return Calendar.current.isDate(self, inSameDayAs: date)
+  }
 }
 
 extension DateFormatter {

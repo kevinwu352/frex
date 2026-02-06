@@ -25,27 +25,25 @@ extension String {
   }
 }
 
-// TODO: try?
-// TODO: 第二参数的名字
-public func path_create_dir(_ path: String?) {
+public func pathCreateDir(_ path: String?) throws {
   guard let path, !path.isEmpty else { return }
   if !FileManager.default.fileExists(atPath: path, isDirectory: nil) {
-    try? FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+    try FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
   }
 }
-public func path_create_file(_ path: String?) {
+public func pathCreateFile(_ path: String?) throws {
   guard let path, !path.isEmpty else { return }
   let dir = (path as NSString).deletingLastPathComponent
   if !FileManager.default.fileExists(atPath: dir, isDirectory: nil) {
-    try? FileManager.default.createDirectory(atPath: dir, withIntermediateDirectories: true, attributes: nil)
+    try FileManager.default.createDirectory(atPath: dir, withIntermediateDirectories: true, attributes: nil)
   }
   if !FileManager.default.fileExists(atPath: path, isDirectory: nil) {
     FileManager.default.createFile(atPath: path, contents: nil, attributes: nil)
   }
 }
-public func path_delete(_ path: String?) {
+public func pathDelete(_ path: String?) throws {
   guard let path, !path.isEmpty else { return }
-  try? FileManager.default.removeItem(atPath: path)
+  try FileManager.default.removeItem(atPath: path)
 }
 
 // null
@@ -53,38 +51,32 @@ public func path_delete(_ path: String?) {
 // string
 // array
 // object
-public func data_read(_ path: String?) -> Data? {
+public func dataRead(_ path: String?) throws -> Data? {
   guard let path, !path.isEmpty else { return nil }
-  return try? Data(contentsOf: URL(fileURLWithPath: path))
+  return try Data(contentsOf: URL(fileURLWithPath: path))
 }
-public func data_write(_ path: String?, data: Data?) {
+public func dataWrite(_ path: String?, data: Data?) throws {
   guard let path, !path.isEmpty else { return }
   let dir = (path as NSString).deletingLastPathComponent
   if !FileManager.default.fileExists(atPath: dir, isDirectory: nil) {
-    try? FileManager.default.createDirectory(atPath: dir, withIntermediateDirectories: true, attributes: nil)
+    try FileManager.default.createDirectory(atPath: dir, withIntermediateDirectories: true, attributes: nil)
   }
-  try? data?.write(to: URL(fileURLWithPath: path))
+  try data?.write(to: URL(fileURLWithPath: path))
 }
 
-public func json_encode(_ json: Any?, options: JSONSerialization.WritingOptions = []) -> Data? {
-  if let json, JSONSerialization.isValidJSONObject(json) {
-    return try? JSONSerialization.data(withJSONObject: json, options: options)
-  } else {
-    return nil
-  }
+public func jsonEncode(_ json: Any?, options: JSONSerialization.WritingOptions = []) throws -> Data? {
+  guard let json, JSONSerialization.isValidJSONObject(json) else { return nil }
+  return try JSONSerialization.data(withJSONObject: json, options: options)
 }
-public func json_decode(_ data: Data?, options: JSONSerialization.ReadingOptions = []) -> Any? {
-  if let data, !data.isEmpty {
-    return json_standardize(try? JSONSerialization.jsonObject(with: data, options: options))
-  } else {
-    return nil
-  }
+public func jsonDecode(_ data: Data?, options: JSONSerialization.ReadingOptions = []) throws -> Any? {
+  guard let data, !data.isEmpty else { return nil }
+  return jsonStandardize(try JSONSerialization.jsonObject(with: data, options: options))
 }
-public func json_standardize(_ json: Any?) -> Any? {
+public func jsonStandardize(_ json: Any?) -> Any? {
   if let array = json as? [Any] {
-    return array.compactMap { json_standardize($0) }
+    return array.compactMap { jsonStandardize($0) }
   } else if let object = json as? [String: Any] {
-    return object.compactMapValues { json_standardize($0) }
+    return object.compactMapValues { jsonStandardize($0) }
   } else if let number = json as? NSNumber {
     if number.isBool {
       return json as? Bool

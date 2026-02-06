@@ -1,6 +1,6 @@
 //
 //  StringExt.swift
-//  frex
+//  CoreBase
 //
 //  Created by Kevin Wu on 2/1/26.
 //

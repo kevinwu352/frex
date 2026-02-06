@@ -1,6 +1,6 @@
 //
 //  Uncat.swift
-//  frex
+//  CoreBase
 //
 //  Created by Kevin Wu on 2/1/26.
 //
@@ -12,6 +12,9 @@ public func withValue<T1, T2>(_ value: T1, handler: (T1) -> T2) -> T2 {
   handler(value)
 }
 
+// MARK: -
+// --------------------------------------------------------------------------------
+
 extension Result {
   public var isSuccess: Bool {
     if case .success = self { true } else { false }
@@ -21,6 +24,9 @@ extension Result {
   }
 }
 // (200..<300).contains((obj as? HTTPURLResponse)?.statusCode ?? 0)
+
+// MARK: -
+// --------------------------------------------------------------------------------
 
 extension Bundle {
   public var versionNumber: String? {
