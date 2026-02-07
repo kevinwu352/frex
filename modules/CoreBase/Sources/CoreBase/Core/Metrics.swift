@@ -8,6 +8,8 @@
 import UIKit
 
 // should be valid after UIWindow(windowScene: scene) in SceneDelegate
+// .sorted { !$1.isKeyWindow } 会把 keyWindow 排前面
+//   且保持 keyWindow 在原列表的顺序，但不应该依赖这一点，其它项的顺序会变
 @MainActor public var mainWindow: UIWindow? {
   UIApplication.shared.connectedScenes
     .compactMap { $0 as? UIWindowScene }

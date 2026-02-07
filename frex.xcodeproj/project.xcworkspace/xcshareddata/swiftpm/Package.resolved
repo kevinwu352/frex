@@ -1,5 +1,5 @@
 {
-  "originHash" : "919cbdb2611629e6b074bf9346e796eeffd01ef15a45a2fd607cd16f549a1c63",
+  "originHash" : "65e514a7485d5529b7033806ed4add36abb3b899ad770d2945480e3202286d31",
   "pins" : [
     {
       "identity" : "factory",
@@ -16,7 +16,7 @@
       "location" : "https://github.com/kevinwu352/SwiftEntryKit.git",
       "state" : {
         "branch" : "dev",
-        "revision" : "56bc3a3a5a9c0d076f8dc8332ff19586aadec559"
+        "revision" : "54aa8b6a686e727c723a153bc8fbca4bdfaeef34"
       }
     },
     {

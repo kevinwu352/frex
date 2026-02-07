@@ -7,6 +7,14 @@
 
 import UIKit
 
+// public func hex2f(_ value: UInt) {
+//   let r = String(format: "%.5g", Double(value >> 16 & 0xff) / 255)
+//   let g = String(format: "%.5g", Double(value >> 8 & 0xff) / 255)
+//   let b = String(format: "%.5g", Double(value & 0xff) / 255)
+//   let s = String(value, radix: 16, uppercase: false)
+//   print("UIColor(red: \(r), green: \(g), blue: \(b), alpha: 1)  /* 0x\(s) */")
+// }
+
 extension UIColor {
 
   public convenience init(hex: UInt, alpha: Double = 1.0) {
