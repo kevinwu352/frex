@@ -6,3 +6,4 @@ identifier_name:
 line_length: 140
 disabled_rules:
   - trailing_comma
+  - nesting

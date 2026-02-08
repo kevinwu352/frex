@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     print("scene will connect to session, window:\(window == nil ? "nil" : "some")")
     guard let scene = scene as? UIWindowScene else { return }
     window = UIWindow(windowScene: scene)
-    window?.rootViewController = RootViewController()
+    window?.rootViewController = UINavigationController(rootViewController: RootViewController())
     window?.makeKeyAndVisible()
   }
 
