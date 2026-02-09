@@ -18,9 +18,34 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // (see `application:configurationForConnectingSceneSession` instead).
     print("scene will connect to session, window:\(window == nil ? "nil" : "some")")
     guard let scene = scene as? UIWindowScene else { return }
+
     window = UIWindow(windowScene: scene)
-    window?.rootViewController = UINavigationController(rootViewController: RootViewController())
+    let tab = UITabBarController()
+    tab.setViewControllers(tabs(), animated: false)
+    window?.rootViewController = tab
     window?.makeKeyAndVisible()
+  }
+
+  func tabs() -> [UIViewController] {
+    let item1 = UITabBarItem(title: "Home", image: .iconHomeN, selectedImage: .iconHomeH)
+    item1.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.darkGray], for: .normal)
+    item1.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.green], for: .selected)
+    let nc1 = UINavigationController(rootViewController: HomeViewController())
+    nc1.tabBarItem = item1
+
+    let item2 = UITabBarItem(title: "Trend", image: .iconTrendN, selectedImage: .iconTrendH)
+    item2.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.darkGray], for: .normal)
+    item2.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.green], for: .selected)
+    let nc2 = UINavigationController(rootViewController: TrendViewController())
+    nc2.tabBarItem = item2
+
+    let item3 = UITabBarItem(title: "User", image: .iconUserN, selectedImage: .iconUserH)
+    item3.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.darkGray], for: .normal)
+    item3.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.green], for: .selected)
+    let nc3 = UINavigationController(rootViewController: UserViewController())
+    nc3.tabBarItem = item3
+
+    return [nc1, nc2, nc3]
   }
 
   func sceneDidDisconnect(_ scene: UIScene) {
