@@ -59,6 +59,8 @@ extension Publishers {
       @objc func handle() {
         _ = subscriber.receive()
       }
+
+      // deinit { Swift.print("ControlEvent deinit") }
     }
   }
 

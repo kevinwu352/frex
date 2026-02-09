@@ -10,7 +10,7 @@ import Combine
 import CoreBase
 
 class RootViewController: UIViewController {
-  lazy var cancellables = Set<AnyCancellable>()
+  lazy var bag = Set<AnyCancellable>()
 
   override func viewDidLoad() {
     super.viewDidLoad()
