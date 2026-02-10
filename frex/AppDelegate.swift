@@ -66,6 +66,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       .LaunchOptionsKey: Any]?
   ) -> Bool {
     // Override point for customization after application launch.
+#if DEBUG
+    print(NSHomeDirectory())
+#endif
 
     let navBarAppearance1 = customNavBarAppearance1()
     // let navBarAppearance2 = customNavBarAppearance2()
