@@ -17,7 +17,7 @@ import UIKit
 
 extension UIColor {
 
-  public convenience init(hex: UInt, alpha: Double = 1.0) {
+  public convenience init(hex: UInt, alpha: Double = 1.0) { // LABEL
     self.init(
       red: CGFloat(hex >> 16 & 0xff) / 255,
       green: CGFloat(hex >> 8 & 0xff) / 255,

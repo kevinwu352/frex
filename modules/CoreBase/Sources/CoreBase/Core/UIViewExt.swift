@@ -88,7 +88,7 @@ extension UIView {
 
   // MARK: -
 
-  public func kangLa(_ priority: UILayoutPriority, _ axis: NSLayoutConstraint.Axis? = nil) {
+  public func kangLa(_ priority: UILayoutPriority, _ axis: NSLayoutConstraint.Axis? = nil) { // LABEL
     if let axis {
       setContentHuggingPriority(priority, for: axis)
     } else {
@@ -96,7 +96,7 @@ extension UIView {
       setContentHuggingPriority(priority, for: .vertical)
     }
   }
-  public func kangYa(_ priority: UILayoutPriority, _ axis: NSLayoutConstraint.Axis? = nil) {
+  public func kangYa(_ priority: UILayoutPriority, _ axis: NSLayoutConstraint.Axis? = nil) { // LABEL
     if let axis {
       setContentCompressionResistancePriority(priority, for: axis)
     } else {
@@ -104,7 +104,7 @@ extension UIView {
       setContentCompressionResistancePriority(priority, for: .vertical)
     }
   }
-  public func degradeLaya(_ value: Int, _ axis: NSLayoutConstraint.Axis? = nil) {
+  public func degradeLaya(_ value: Int, _ axis: NSLayoutConstraint.Axis? = nil) { // LABEL
     if let axis {
       setContentHuggingPriority(.defaultLow - Float(value), for: axis)
       setContentCompressionResistancePriority(.defaultHigh - Float(value), for: axis)
@@ -136,6 +136,14 @@ extension UIView {
     } else {
       return superview?.ancestor(cls)
     }
+  }
+  public var ownerVc: UIViewController? {
+    var responder: UIResponder? = self
+    while !(responder is UIViewController) {
+      responder = responder?.next
+      if responder == nil { break }
+    }
+    return responder as? UIViewController
   }
 
   // MARK: -
@@ -195,16 +203,6 @@ extension UIViewController {
 
 // MARK: -
 
-extension UIView {
-  public var ownerVc: UIViewController? {
-    var responder: UIResponder? = self
-    while !(responder is UIViewController) {
-      responder = responder?.next
-      if responder == nil { break }
-    }
-    return responder as? UIViewController
-  }
-}
 extension UIViewController {
   public var ancestorVc: UIViewController? {
     var ret = self

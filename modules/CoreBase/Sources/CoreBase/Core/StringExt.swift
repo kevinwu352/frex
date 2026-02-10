@@ -8,14 +8,14 @@
 import Foundation
 
 extension String {
-  public func prefixed(_ str: String?, _ sep: String? = nil) -> String {
+  public func prefixed(_ str: String?, _ sep: String? = nil) -> String { // LABEL
     if let str, !str.isEmpty {
       return str + (sep ?? "") + self
     } else {
       return self
     }
   }
-  public func suffixed(_ str: String?, _ sep: String? = nil) -> String {
+  public func suffixed(_ str: String?, _ sep: String? = nil) -> String { // LABEL
     if let str, !str.isEmpty {
       return self + (sep ?? "") + str
     } else {
