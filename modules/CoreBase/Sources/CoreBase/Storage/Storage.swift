@@ -79,6 +79,14 @@ extension Storage { // LABEL
     queue.async(flags: .barrier) { self.map[key] = value }
   }
 
+  // TODO: [Any] & [String:Any]
+  // public func array(forKey key: String) -> [Any]? {
+  //   queue.sync { map[key] as? [Any] }
+  // }
+  // public func setArray(_ value: [Any]?, forKey key: String) {
+  //   queue.async(flags: .barrier) { self.map[key] = value }
+  // }
+
   public func date(forKey key: String) -> Date? {
     queue.sync {
       guard let time = map[key] as? TimeInterval else { return nil }
@@ -90,7 +98,7 @@ extension Storage { // LABEL
     queue.async(flags: .barrier) { self.map[key] = value?.timeIntervalSince1970 }
   }
 
-  public func object<T: Decodable>(forKey key: String) -> T? {
+  public func codable<T: Decodable>(forKey key: String) -> T? {
     queue.sync {
       do {
         let data = try jsonEncode(map[key])
@@ -101,7 +109,7 @@ extension Storage { // LABEL
       }
     }
   }
-  public func setObject<T: Encodable & Sendable>(_ value: T?, forKey key: String) {
+  public func setCodable<T: Encodable & Sendable>(_ value: T?, forKey key: String) {
     queue.async(flags: .barrier) {
       do {
         guard let value else { throw URLError(.zeroByteResource) }
@@ -112,16 +120,5 @@ extension Storage { // LABEL
         self.map[key] = nil
       }
     }
-  }
-}
-
-extension Storage {
-  public var name: String? {
-    get { string(forKey: "nnn") }
-    set { setString(newValue, forKey: "nnn") }
-  }
-  public var age: Int? {
-    get { int(forKey: "aaa") }
-    set { setInt(newValue, forKey: "aaa") }
   }
 }

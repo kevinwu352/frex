@@ -6,8 +6,8 @@
 //
 
 import Testing
-@testable import CoreBase
 import Factory
+@testable import CoreBase
 
 extension Container {
   var myService: Factory<MyService> {
