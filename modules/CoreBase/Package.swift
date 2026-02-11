@@ -18,6 +18,7 @@ let package = Package(
   dependencies: [
     .package(url: "https://github.com/SimplyDanny/SwiftLintPlugins.git", from: "0.63.0"),
     .package(url: "https://github.com/hmlongco/Factory.git", from: "2.5.0"),
+    .package(url: "https://github.com/evgenyneu/keychain-swift.git", from: "24.0.0"),
     .package(url: "https://github.com/SnapKit/SnapKit.git", from: "5.7.0"),
     .package(url: "https://github.com/kevinwu352/SwiftEntryKit.git", branch: "dev"),
   ],
@@ -26,6 +27,7 @@ let package = Package(
       name: "CoreBase",
       dependencies: [
         .product(name: "Factory", package: "Factory"),
+        .product(name: "KeychainSwift", package: "keychain-swift"),
         .product(name: "SnapKit", package: "SnapKit"),
         .product(name: "SwiftEntryKit", package: "SwiftEntryKit"),
       ],

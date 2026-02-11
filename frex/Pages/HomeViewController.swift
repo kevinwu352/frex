@@ -41,6 +41,12 @@ class HomeViewController: UIViewController {
       make.width.equalToSuperview()
       make.height.equalTo(1000)
     }
+
+  }
+
+  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesEnded(touches, with: event)
+    navigationController?.pushViewController(TestViewController(), animated: true)
   }
 
   @objc func handle() {
@@ -49,6 +55,7 @@ class HomeViewController: UIViewController {
 
   lazy var scrollView: UIScrollView = {
     let ret = UIScrollView()
+    ret.isUserInteractionEnabled = false
     return ret
   }()
 

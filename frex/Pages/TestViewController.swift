@@ -23,6 +23,14 @@ class TestViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
   }
+  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesEnded(touches, with: event)
+
+    options.accountBalanceMasked = true
+  }
+
+  let options = UserOptions(uid: "kkk", persist: true)
 
 }
