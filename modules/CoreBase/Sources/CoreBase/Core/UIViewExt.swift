@@ -200,15 +200,3 @@ extension UIViewController {
     child.removeFromParent()
   }
 }
-
-// MARK: -
-
-extension UIViewController {
-  public var ancestorVc: UIViewController? {
-    var ret = self
-    while let vc = ret.parent {
-      ret = vc
-    }
-    return ret
-  }
-}

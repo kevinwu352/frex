@@ -7,3 +7,4 @@ line_length: 140
 disabled_rules:
   - trailing_comma
   - nesting
+  - opening_brace
