@@ -19,9 +19,9 @@ public final class Storage: @unchecked Sendable {
         do {
           let data = try jsonEncode(self.map, options: .prettyPrinted)
           try dataWrite(self.path, data: data)
-          print("storage, synchronize success, \(self.path)")
+          print("storage, synchronize success, \((self.path as NSString).lastPathComponent)")
         } catch {
-          print("storage, synchronize failed, \(self.path)")
+          print("storage, synchronize failed, \((self.path as NSString).lastPathComponent)")
         }
       }
       queue.async(execute: work!)
@@ -37,88 +37,91 @@ public final class Storage: @unchecked Sendable {
     self.path = path
     do {
       let data = try dataRead(path)
-      map = try jsonDecode(data) as? [String: Any] ?? [:]
-      print("storage, load success, \(path)")
+      let json = try jsonDecode(data)
+      map = jsonStandardize(json) as? [String: Any] ?? [:]
+      print("storage, load success, \((path as NSString).lastPathComponent)")
     } catch {
-      print("storage, load failed, \(path)")
+      print("storage, load failed, \((path as NSString).lastPathComponent)")
       map = [:]
     }
     queue = DispatchQueue(label: "queue-storage-\(UUID().uuidString.lowercased())", attributes: .concurrent)
   }
 
-  deinit { print("storage, deinit, \(path)") }
+  deinit { print("storage, deinit, \((path as NSString).lastPathComponent)") }
 }
 
-extension Storage {
-  public func getBool(_ key: String) -> Bool? {
+extension Storage { // LABEL
+  public func bool(forKey key: String) -> Bool? {
     queue.sync { map[key] as? Bool }
   }
-  public func setBool(_ value: Bool?, _ key: String) {
+  public func setBool(_ value: Bool?, forKey key: String) {
     queue.async(flags: .barrier) { self.map[key] = value }
   }
 
-  public func getInt(_ key: String) -> Int? {
+  public func int(forKey key: String) -> Int? {
     queue.sync { map[key] as? Int }
   }
-  public func setInt(_ value: Int?, _ key: String) {
+  public func setInt(_ value: Int?, forKey key: String) {
     queue.async(flags: .barrier) { self.map[key] = value }
   }
 
-  public func getDouble(_ key: String) -> Double? {
+  public func double(forKey key: String) -> Double? {
     queue.sync { map[key] as? Double }
   }
-  public func setDouble(_ value: Double?, _ key: String) {
+  public func setDouble(_ value: Double?, forKey key: String) {
     queue.async(flags: .barrier) { self.map[key] = value }
   }
 
-  public func getString(_ key: String) -> String? {
+  public func string(forKey key: String) -> String? {
     queue.sync { map[key] as? String }
   }
-  public func setString(_ value: String?, _ key: String) {
+  public func setString(_ value: String?, forKey key: String) {
     queue.async(flags: .barrier) { self.map[key] = value }
   }
 
-//  public func getDate(_ key: String) -> Date? {
-//    queue.sync {
-//      guard let time = map[key] as? TimeInterval else { return nil }
-//      return Date(timeIntervalSince1970: time)
-//    }
-//  }
-//  public func setDate(_ value: Date?, _ key: String) {
-//    queue.async(flags: .barrier) { self.map[key] = value?.timeIntervalSince1970 }
-//  }
+  public func date(forKey key: String) -> Date? {
+    queue.sync {
+      guard let time = map[key] as? TimeInterval else { return nil }
+      let ret = Date(timeIntervalSince1970: time)
+      return ret
+    }
+  }
+  public func setDate(_ value: Date?, forKey key: String) {
+    queue.async(flags: .barrier) { self.map[key] = value?.timeIntervalSince1970 }
+  }
 
-//  public func getObject<T: Decodable>(_ key: String) -> T? {
-//    queue.sync {
-//      do {
-//        guard let data = try jsonEncode(map[key]) else { return nil }
-//        return try JSONDecoder().decode(T.self, from: data)
-//      } catch {
-//        return nil
-//      }
-//    }
-//  }
-//  public func setObject<T: Encodable & Sendable>(_ value: T?, _ key: String) {
-//    queue.async(flags: .barrier) {
-//      do {
-//        guard let value else { return }
-//        let data = try JSONEncoder().encode(value)
-//        let json = try jsonDecode(data)
-//        self.map[key] = json
-//      } catch {
-//        self.map[key] = nil
-//      }
-//    }
-//  }
+  public func object<T: Decodable>(forKey key: String) -> T? {
+    queue.sync {
+      do {
+        let data = try jsonEncode(map[key])
+        let ret = try JSONDecoder().decode(T.self, from: data)
+        return ret
+      } catch {
+        return nil
+      }
+    }
+  }
+  public func setObject<T: Encodable & Sendable>(_ value: T?, forKey key: String) {
+    queue.async(flags: .barrier) {
+      do {
+        guard let value else { throw URLError(.zeroByteResource) }
+        let data = try JSONEncoder().encode(value)
+        let json = try jsonDecode(data)
+        self.map[key] = jsonStandardize(json)
+      } catch {
+        self.map[key] = nil
+      }
+    }
+  }
 }
 
 extension Storage {
   public var name: String? {
-    get { getString("nnn") }
-    set { setString(newValue, "nnn") }
+    get { string(forKey: "nnn") }
+    set { setString(newValue, forKey: "nnn") }
   }
   public var age: Int? {
-    get { getInt("aaa") }
-    set { setInt(newValue, "aaa") }
+    get { int(forKey: "aaa") }
+    set { setInt(newValue, forKey: "aaa") }
   }
 }

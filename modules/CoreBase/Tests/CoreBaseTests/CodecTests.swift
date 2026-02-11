@@ -15,7 +15,8 @@ struct CodecTests {
     let str = """
       {"nn":null,"bb":true,"ii":100,"dd":1.2,"id1":1.0,"id2":10.0,"ss":"bob","aa":[1,2,null,3],"a1":[1,2,4.0,3],"a2":[1,2,4.2,3],"oo":{"b":2,"d":null,"c":3,"a":1},"o1":{"b":2,"d":4.0,"c":3,"a":1},"o2":{"b":2,"d":4.2,"c":3,"a":1}}
       """
-    let map = (try? jsonDecode(str.utf8dat)) as? [String: Any] ?? [:]
+    let json = try? jsonDecode(str.utf8dat)
+    let map = jsonStandardize(json) as? [String: Any] ?? [:]
 
     let aa = map["aa"] as? [Int?]
     #expect(aa != nil)

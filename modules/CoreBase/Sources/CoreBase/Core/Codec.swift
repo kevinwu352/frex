@@ -25,13 +25,13 @@ extension String {
   }
 }
 public func pathCreateDir(_ path: String?) throws {
-  guard let path, !path.isEmpty else { return }
+  guard let path, !path.isEmpty else { throw URLError(.fileDoesNotExist) }
   if !FileManager.default.fileExists(atPath: path, isDirectory: nil) {
     try FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
   }
 }
 public func pathCreateFile(_ path: String?) throws {
-  guard let path, !path.isEmpty else { return }
+  guard let path, !path.isEmpty else { throw URLError(.fileDoesNotExist) }
   let dir = (path as NSString).deletingLastPathComponent
   if !FileManager.default.fileExists(atPath: dir, isDirectory: nil) {
     try FileManager.default.createDirectory(atPath: dir, withIntermediateDirectories: true, attributes: nil)
@@ -41,16 +41,16 @@ public func pathCreateFile(_ path: String?) throws {
   }
 }
 public func pathDelete(_ path: String?) throws {
-  guard let path, !path.isEmpty else { return }
+  guard let path, !path.isEmpty else { throw URLError(.fileDoesNotExist) }
   try FileManager.default.removeItem(atPath: path)
 }
 
-public func dataRead(_ path: String?) throws -> Data? {
-  guard let path, !path.isEmpty else { return nil }
+public func dataRead(_ path: String?) throws -> Data {
+  guard let path, !path.isEmpty else { throw URLError(.fileDoesNotExist) }
   return try Data(contentsOf: URL(fileURLWithPath: path))
 }
 public func dataWrite(_ path: String?, data: Data?) throws {
-  guard let path, !path.isEmpty else { return }
+  guard let path, !path.isEmpty else { throw URLError(.fileDoesNotExist) }
   let dir = (path as NSString).deletingLastPathComponent
   if !FileManager.default.fileExists(atPath: dir, isDirectory: nil) {
     try FileManager.default.createDirectory(atPath: dir, withIntermediateDirectories: true, attributes: nil)
@@ -63,13 +63,16 @@ public func dataWrite(_ path: String?, data: Data?) throws {
 // string
 // array
 // object
-public func jsonEncode(_ json: Any?, options: JSONSerialization.WritingOptions = []) throws -> Data? {
-  guard let json, JSONSerialization.isValidJSONObject(json) else { return nil }
+public func jsonEncode(_ json: Any?, options: JSONSerialization.WritingOptions = []) throws -> Data {
+  // return true only when json is array/object
+  guard let json, JSONSerialization.isValidJSONObject(json) else { throw URLError(.cannotParseResponse) }
   return try JSONSerialization.data(withJSONObject: json, options: options)
 }
-public func jsonDecode(_ data: Data?, options: JSONSerialization.ReadingOptions = []) throws -> Any? {
-  guard let data, !data.isEmpty else { return nil }
-  return jsonStandardize(try JSONSerialization.jsonObject(with: data, options: options))
+public func jsonDecode(_ data: Data?, options: JSONSerialization.ReadingOptions = []) throws -> Any {
+  guard let data, !data.isEmpty else { throw URLError(.zeroByteResource) }
+  // success only when data represents array/object
+  return try JSONSerialization.jsonObject(with: data, options: options)
+  // return jsonStandardize(try JSONSerialization.jsonObject(with: data, options: options)) as Any
 }
 public func jsonStandardize(_ json: Any?) -> Any? {
   if json is NSNull {
