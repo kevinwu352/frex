@@ -21,6 +21,7 @@ let package = Package(
     .package(url: "https://github.com/evgenyneu/keychain-swift.git", from: "24.0.0"),
     .package(url: "https://github.com/SnapKit/SnapKit.git", from: "5.7.0"),
     .package(url: "https://github.com/kevinwu352/SwiftEntryKit.git", branch: "dev"),
+    .package(url: "https://github.com/psharanda/Atributika.git", from: "5.0.0"),
   ],
   targets: [
     .target(
@@ -30,6 +31,8 @@ let package = Package(
         .product(name: "KeychainSwift", package: "keychain-swift"),
         .product(name: "SnapKit", package: "SnapKit"),
         .product(name: "SwiftEntryKit", package: "SwiftEntryKit"),
+        .product(name: "Atributika", package: "Atributika"),
+        .product(name: "AtributikaViews", package: "Atributika"),
       ],
       // swiftSettings: [.defaultIsolation(MainActor.self)],
       plugins: [.plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLintPlugins")],

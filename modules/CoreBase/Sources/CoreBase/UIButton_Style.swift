@@ -47,30 +47,30 @@ public class StyButton: UIButton {
                 spacing: ((Status) -> Double?)? = nil,
                 alignment: ((Status) -> NSDirectionalRectEdge?)? = nil,
                 autohigh: Bool = false
-    ) {
+    ) { // LABEL
       self.image = image
       self.spacing = spacing
       self.alignment = alignment
       self.autohigh = autohigh
     }
     func apply(_ conf: inout Configuration?, status: Status) {
-      let img = image(status)
+      let value = image(status)
       if autohigh {
-        if img.1 != nil {
-          conf?.image = img.0
-          conf?.baseForegroundColor = img.1?.turn(status.high)
+        if value.1 != nil {
+          conf?.image = value.0
+          conf?.baseForegroundColor = value.1?.turn(status.high)
         } else {
-          conf?.image = img.0?.turn(status.high, nil)
+          conf?.image = value.0?.turn(status.high, nil)
         }
       } else {
-        conf?.image = img.0
-        conf?.baseForegroundColor = img.1
+        conf?.image = value.0
+        conf?.baseForegroundColor = value.1
       }
-      if let spacing = spacing?(status) {
-        conf?.imagePadding = spacing
+      if let spacing, let value = spacing(status) {
+        conf?.imagePadding = value
       }
-      if let alignment = alignment?(status) {
-        conf?.imagePlacement = alignment
+      if let alignment, let value = alignment(status) {
+        conf?.imagePlacement = value
       }
     }
   }
@@ -78,25 +78,26 @@ public class StyButton: UIButton {
     didSet { setNeedsStyle() }
   }
 
-  // titleLineBreakMode
-  // subtitleLineBreakMode
   public struct Title {
     public var str: (Status) -> String?
     public var font: (Status) -> UIFont?
     public var color: (Status) -> UIColor?
+    public var breakMode: ((Status) -> NSLineBreakMode?)?
     public var spacing: ((Status) -> Double?)?
     public var alignment: ((Status) -> Configuration.TitleAlignment?)?
     public var autohigh = false
     public init(str: @escaping (Status) -> String?,
                 font: @escaping (Status) -> UIFont?,
                 color: @escaping (Status) -> UIColor?,
+                breakMode: ((Status) -> NSLineBreakMode?)? = nil,
                 spacing: ((Status) -> Double?)? = nil,
                 alignment: ((Status) -> Configuration.TitleAlignment?)? = nil,
                 autohigh: Bool = false
-    ) {
+    ) { // LABEL
       self.str = str
       self.font = font
       self.color = color
+      self.breakMode = breakMode
       self.spacing = spacing
       self.alignment = alignment
       self.autohigh = autohigh
@@ -107,11 +108,14 @@ public class StyButton: UIButton {
         .foregroundColor: color(status)?.turn(status.high && autohigh) as Any,
       ])
       conf?.attributedTitle = AttributedString(str(status) ?? "", attributes: container)
-      if let spacing = spacing?(status) {
-        conf?.titlePadding = spacing
+      if let breakMode, let value = breakMode(status) {
+        conf?.titleLineBreakMode = value
       }
-      if let alignment = alignment?(status) {
-        conf?.titleAlignment = alignment
+      if let spacing, let value = spacing(status) {
+        conf?.titlePadding = value
+      }
+      if let alignment, let value = alignment(status) {
+        conf?.titleAlignment = value
       }
     }
   }
@@ -123,15 +127,18 @@ public class StyButton: UIButton {
     public var str: (Status) -> String?
     public var font: (Status) -> UIFont?
     public var color: (Status) -> UIColor?
+    public var breakMode: ((Status) -> NSLineBreakMode?)?
     public var autohigh = false
     public init(str: @escaping (Status) -> String?,
                 font: @escaping (Status) -> UIFont?,
                 color: @escaping (Status) -> UIColor?,
+                breakMode: ((Status) -> NSLineBreakMode?)? = nil,
                 autohigh: Bool = false
-    ) {
+    ) { // LABEL
       self.str = str
       self.font = font
       self.color = color
+      self.breakMode = breakMode
       self.autohigh = autohigh
     }
     func apply(_ conf: inout Configuration?, status: Status) {
@@ -140,6 +147,9 @@ public class StyButton: UIButton {
         .foregroundColor: color(status)?.turn(status.high && autohigh) as Any,
       ])
       conf?.attributedSubtitle = AttributedString(str(status) ?? "", attributes: container)
+      if let breakMode, let value = breakMode(status) {
+        conf?.subtitleLineBreakMode = value
+      }
     }
   }
   public var subtitle: Subtitle? {
@@ -160,7 +170,7 @@ public class StyButton: UIButton {
                 borderWidth: ((Status) -> Double?)? = nil,
                 borderColor: ((Status) -> UIColor?)? = nil,
                 autohigh: Bool = false
-    ) {
+    ) { // LABEL
       self.color = color
       self.image = image
       self.cornerRadius = cornerRadius
@@ -169,21 +179,23 @@ public class StyButton: UIButton {
       self.autohigh = autohigh
     }
     func apply(_ conf: inout Configuration?, status: Status) {
-      // baseBackgroundColor
-      if let color = color?(status) {
-        conf?.background.backgroundColor = color.turn(status.high && autohigh)
+      if let color {
+        let value = color(status)
+        conf?.background.backgroundColor = value?.turn(status.high && autohigh)
       }
-      if let image = image?(status) {
-        conf?.background.image = image.0?.turn(status.high && autohigh, image.1)
+      if let image {
+        let value = image(status)
+        conf?.background.image = value.0?.turn(status.high && autohigh, value.1)
       }
-      if let cornerRadius = cornerRadius?(status) {
-        conf?.background.cornerRadius = cornerRadius
+      if let cornerRadius, let value = cornerRadius(status) {
+        conf?.background.cornerRadius = value
       }
-      if let borderWidth = borderWidth?(status) {
-        conf?.background.strokeWidth = borderWidth
+      if let borderWidth, let value = borderWidth(status) {
+        conf?.background.strokeWidth = value
       }
-      if let borderColor = borderColor?(status) {
-        conf?.background.strokeColor = borderColor
+      if let borderColor {
+        let value = borderColor(status)
+        conf?.background.strokeColor = value
       }
     }
   }
@@ -191,6 +203,12 @@ public class StyButton: UIButton {
     didSet { setNeedsStyle() }
   }
 
+  public var baseBackgroundColor: ((Status) -> UIColor?)? {
+    didSet { setNeedsStyle() }
+  }
+  public var baseForegroundColor: ((Status) -> UIColor?)? {
+    didSet { setNeedsStyle() }
+  }
   public var buttonSize: UIButton.Configuration.Size? {
     didSet { setNeedsStyle() }
   }
@@ -213,6 +231,14 @@ public class StyButton: UIButton {
       btn.title?.apply(&conf, status: status)
       btn.subtitle?.apply(&conf, status: status)
       btn.background?.apply(&conf, status: status)
+      if let baseBackgroundColor = btn.baseBackgroundColor {
+        let value = baseBackgroundColor(status)
+        conf?.baseBackgroundColor = value
+      }
+      if let baseForegroundColor = btn.baseForegroundColor {
+        let value = baseForegroundColor(status)
+        conf?.baseForegroundColor = value
+      }
       if let size = btn.buttonSize {
         conf?.buttonSize = size
       }
@@ -242,7 +268,7 @@ extension UIColor {
   }
 }
 extension UIImage {
-  fileprivate func turn(_ flag: Bool, _ insets: UIEdgeInsets?) -> UIImage {
+  fileprivate func turn(_ flag: Bool, _ insets: UIEdgeInsets?) -> UIImage { // LABEL
     (flag ? brighted(0.05) : self).inset(insets)
   }
 }
