@@ -9,5 +9,5 @@ import UIKit
 
 extension UIFont {
   public static let head1 = UIFont.boldSystemFont(ofSize: 16)
-  public static let body = UIFont.systemFont(ofSize: 14)
+  public static let body1 = UIFont.systemFont(ofSize: 14)
 }
