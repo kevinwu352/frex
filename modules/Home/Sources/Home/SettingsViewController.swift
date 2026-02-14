@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreBase
+import Factory
 
 class SettingsViewController: UIViewController {
 
@@ -32,7 +33,7 @@ class SettingsViewController: UIViewController {
       make.top.equalTo(imageView2.snp.bottom).offset(10)
     }
 
-    stackView.addArrangedSubviews([button1, button2])
+    stackView.addArrangedSubviews([button1, button2, button3])
     view.addSubview(stackView)
     stackView.snp.remakeConstraints { make in
       make.centerX.equalToSuperview()
@@ -86,14 +87,35 @@ class SettingsViewController: UIViewController {
     return ret
   }()
 
+  lazy var button3: UIButton = {
+    let ret = UIButton(type: .system)
+    ret.tag = 3
+    ret.setTitle("--", for: .normal)
+    ret.addTarget(self, action: #selector(themeAction), for: .touchUpInside)
+    return ret
+  }()
+
   @objc func themeAction(_ sender: UIButton) {
     let value = self.view.window?.overrideUserInterfaceStyle
     print(value?.name ?? "")
+
+    // overrideUserInterfaceStyle 这参数能给 UIWindow/UIView/UIViewController，修改对应的
+    // 推荐修改 UIWindow 的
     if sender.tag == 1 {
+      Container.shared.defaults().theme = .day
       view.window?.overrideUserInterfaceStyle = .light
-    } else {
+//      view.overrideUserInterfaceStyle = .light
+//      overrideUserInterfaceStyle = .light
+    } else if sender.tag == 2 {
       view.window?.overrideUserInterfaceStyle = .dark
+      Container.shared.defaults().theme = .night
+//      view.overrideUserInterfaceStyle = .dark
+//      overrideUserInterfaceStyle = .dark
+    } else {
+      view.window?.overrideUserInterfaceStyle = .unspecified
+      Container.shared.defaults().theme = nil
     }
+
   }
 
 }

@@ -26,7 +26,9 @@ public final class Defaults {
 
     lastUsername = raw.string(forKey: "last_username")
 
-    theme = raw.string(forKey: "theme_code")
+    if let value = raw.string(forKey: "theme_code") {
+      theme = Theme(rawValue: value)
+    }
     language = raw.string(forKey: "language_code")
   }
   deinit { print("defaults, deinit") }
@@ -39,8 +41,8 @@ public final class Defaults {
     willSet { raw.setString(newValue, forKey: "last_username") }
   }
 
-  @After public var theme: String? {
-    willSet { raw.setString(newValue, forKey: "theme_code") }
+  @After public var theme: Theme? {
+    willSet { raw.setString(newValue?.rawValue, forKey: "theme_code") }
   }
   @After public var language: String? {
     willSet { raw.setString(newValue, forKey: "language_code") }

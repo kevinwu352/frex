@@ -44,7 +44,7 @@ public class HomeViewController: UIViewController {
 
   lazy var label: UILabel = {
     let ret = UILabel()
-    ret.font = .body
+    ret.font = .body1
     ret.text = "asdf"
     return ret
   }()

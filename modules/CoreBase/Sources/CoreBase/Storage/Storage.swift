@@ -24,7 +24,8 @@ public final class Storage: @unchecked Sendable {
           print("storage, synchronize failed, \((self.path as NSString).lastPathComponent)")
         }
       }
-      queue.async(execute: work!)
+      // queue.async(execute: work!)
+      DispatchQueue.main.async(execute: work!)
     }
   }
   private var work: DispatchWorkItem? {

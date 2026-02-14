@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreBase
+import Factory
 import Home
 import Line
 import Profile
@@ -24,6 +25,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     guard let scene = scene as? UIWindowScene else { return }
 
     window = UIWindow(windowScene: scene)
+    if let value = Container.shared.defaults().theme?.value {
+      window?.overrideUserInterfaceStyle = value
+    }
     let tab = UITabBarController()
     tab.setViewControllers(tabs(), animated: false)
     window?.rootViewController = tab
