@@ -4,20 +4,34 @@
 import PackageDescription
 
 let package = Package(
-    name: "Line",
-    products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
-        .library(
-            name: "Line",
-            targets: ["Line"]
-        ),
-    ],
-    targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
-        .target(
-            name: "Line"
-        ),
+  name: "Line",
+  defaultLocalization: "en",
+  platforms: [
+    .iOS(.v17),
+  ],
+  products: [
+    .library(
+      name: "Line",
+      targets: ["Line"]
+    ),
+  ],
+  dependencies: [
+    .package(url: "https://github.com/SimplyDanny/SwiftLintPlugins.git", from: "0.63.0"),
+    .package(name: "CoreBase", path: "../CoreBase"),
+    .package(url: "https://github.com/hmlongco/Factory.git", from: "2.5.0"),
+    .package(url: "https://github.com/SnapKit/SnapKit.git", from: "5.7.0"),
+  ],
+  targets: [
+    .target(
+      name: "Line",
+      dependencies: [
+        .product(name: "CoreBase", package: "CoreBase"),
+        .product(name: "Factory", package: "Factory"),
+        .product(name: "SnapKit", package: "SnapKit"),
+      ],
+      plugins: [.plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLintPlugins")],
+    ),
 
-    ]
+  ]
 )
+
