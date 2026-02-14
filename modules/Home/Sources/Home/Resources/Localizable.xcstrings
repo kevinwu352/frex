@@ -1,18 +1,18 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "test_lan" : {
+    "text_in_mod" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "lan-ee"
+            "value" : "in_mod_ee"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "lan-ff"
+            "value" : "in_mod_ff"
           }
         }
       }

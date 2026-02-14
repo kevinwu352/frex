@@ -15,7 +15,6 @@ class SettingsViewController: UIViewController {
     super.viewDidLoad()
     view.backgroundColor = .lightGray
 
-
     stackView2.addArrangedSubviews([button4])
     view.addSubview(stackView2)
     stackView2.snp.remakeConstraints { make in
@@ -35,6 +34,11 @@ class SettingsViewController: UIViewController {
       make.top.equalTo(label1.snp.bottom).offset(10)
     }
 
+    view.addSubview(label3)
+    label3.snp.remakeConstraints { make in
+      make.centerX.equalToSuperview()
+      make.top.equalTo(label2.snp.bottom).offset(10)
+    }
 
     stackView1.addArrangedSubviews([button1, button2, button3])
     view.addSubview(stackView1)
@@ -62,13 +66,19 @@ class SettingsViewController: UIViewController {
 
   lazy var label1: UILabel = {
     let ret = UILabel()
-    ret.text = NSLocalizedString("test_lan", bundle: .module, comment: "")
+    ret.text = String(localized: "text_in_mod")
     return ret
   }()
 
   lazy var label2: UILabel = {
     let ret = UILabel()
-    ret.text = "bbb"
+    ret.text = .kWelcomeMsg
+    return ret
+  }()
+
+  lazy var label3: UILabel = {
+    let ret = UILabel()
+    ret.text = .kFirstMsg
     return ret
   }()
 

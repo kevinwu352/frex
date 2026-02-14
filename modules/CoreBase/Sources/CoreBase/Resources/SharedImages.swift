@@ -1,5 +1,5 @@
 //
-//  Images.swift
+//  SharedImages.swift
 //  CoreBase
 //
 //  Created by Kevin Wu on 2/14/26.

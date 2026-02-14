@@ -22,8 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let lan = UserDefaults.standard.value(forKey: "AppleLanguages")
     print(lan)
-    let str = NSLocalizedString("god", comment: "")
-    print("god: \(str)")
+    let str = String(localized: "shen")
+    print("shen: \(str)")
 
     return true
   }
