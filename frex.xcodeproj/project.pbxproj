@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A0BC4A22F403AB9007CCB56 /* Home in Frameworks */ = {isa = PBXBuildFile; productRef = 0A0BC4A12F403AB9007CCB56 /* Home */; };
+		0A0BC4A42F403ABD007CCB56 /* Line in Frameworks */ = {isa = PBXBuildFile; productRef = 0A0BC4A32F403ABD007CCB56 /* Line */; };
+		0A0BC4A62F403AC1007CCB56 /* Profile in Frameworks */ = {isa = PBXBuildFile; productRef = 0A0BC4A52F403AC1007CCB56 /* Profile */; };
 		0A5C0DAA2F333BB8009DA6F1 /* CoreBase in Frameworks */ = {isa = PBXBuildFile; productRef = 0A5C0DA92F333BB8009DA6F1 /* CoreBase */; };
 		0A90320B2F33878E00B9A49A /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = 0A90320A2F33878E00B9A49A /* Auth */; };
 /* End PBXBuildFile section */
@@ -61,8 +64,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A0BC4A42F403ABD007CCB56 /* Line in Frameworks */,
 				0A90320B2F33878E00B9A49A /* Auth in Frameworks */,
 				0A5C0DAA2F333BB8009DA6F1 /* CoreBase in Frameworks */,
+				0A0BC4A62F403AC1007CCB56 /* Profile in Frameworks */,
+				0A0BC4A22F403AB9007CCB56 /* Home in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,6 +125,9 @@
 			packageProductDependencies = (
 				0A5C0DA92F333BB8009DA6F1 /* CoreBase */,
 				0A90320A2F33878E00B9A49A /* Auth */,
+				0A0BC4A12F403AB9007CCB56 /* Home */,
+				0A0BC4A32F403ABD007CCB56 /* Line */,
+				0A0BC4A52F403AC1007CCB56 /* Profile */,
 			);
 			productName = frex;
 			productReference = 0A5C0C472F3300E6009DA6F1 /* frex.app */;
@@ -406,6 +415,18 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0A0BC4A12F403AB9007CCB56 /* Home */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Home;
+		};
+		0A0BC4A32F403ABD007CCB56 /* Line */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Line;
+		};
+		0A0BC4A52F403AC1007CCB56 /* Profile */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Profile;
+		};
 		0A5C0DA92F333BB8009DA6F1 /* CoreBase */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CoreBase;

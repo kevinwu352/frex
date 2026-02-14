@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import Home
+import Line
+import Profile
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -33,16 +36,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let nc1 = UINavigationController(rootViewController: HomeViewController())
     nc1.tabBarItem = item1
 
-    let item2 = UITabBarItem(title: "Trend", image: .iconTrendN, selectedImage: .iconTrendH)
+    let item2 = UITabBarItem(title: "Line", image: .iconLineN, selectedImage: .iconLineH)
     item2.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.darkGray], for: .normal)
     item2.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.green], for: .selected)
-    let nc2 = UINavigationController(rootViewController: TrendViewController())
+    let nc2 = UINavigationController(rootViewController: LineViewController())
     nc2.tabBarItem = item2
 
-    let item3 = UITabBarItem(title: "User", image: .iconUserN, selectedImage: .iconUserH)
+    let item3 = UITabBarItem(title: "Profile", image: .iconProfileN, selectedImage: .iconProfileH)
     item3.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.darkGray], for: .normal)
     item3.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.green], for: .selected)
-    let nc3 = UINavigationController(rootViewController: UserViewController())
+    let nc3 = UINavigationController(rootViewController: ProfileViewController())
     nc3.tabBarItem = item3
 
     return [nc1, nc2, nc3]

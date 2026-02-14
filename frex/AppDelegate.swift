@@ -7,56 +7,6 @@
 
 import UIKit
 
-@MainActor
-func customNavBarAppearance1() -> UINavigationBarAppearance {
-  let ret = UINavigationBarAppearance()
-
-  // Apply a red background.
-  ret.configureWithOpaqueBackground()
-  ret.backgroundColor = .red
-
-  // Apply green colored normal and large titles.
-  ret.titleTextAttributes = [.foregroundColor: UIColor.green]
-  ret.largeTitleTextAttributes = [.foregroundColor: UIColor.green]
-
-  // Apply white color to all the nav bar buttons.
-  let item = UIBarButtonItemAppearance(style: .plain)
-  item.normal.titleTextAttributes = [.foregroundColor: UIColor.white]
-  item.disabled.titleTextAttributes = [.foregroundColor: UIColor.lightText]
-  item.highlighted.titleTextAttributes = [.foregroundColor: UIColor.label]
-  item.focused.titleTextAttributes = [.foregroundColor: UIColor.white]
-  ret.buttonAppearance = item
-  ret.backButtonAppearance = item
-  ret.doneButtonAppearance = item
-
-  return ret
-}
-
-@MainActor
-func customNavBarAppearance2() -> UINavigationBarAppearance {
-  let ret = UINavigationBarAppearance()
-
-  // Apply a red background.
-  ret.configureWithOpaqueBackground()
-  ret.backgroundColor = .blue
-
-  // Apply green colored normal and large titles.
-  ret.titleTextAttributes = [.foregroundColor: UIColor.green]
-  ret.largeTitleTextAttributes = [.foregroundColor: UIColor.green]
-
-  // Apply white color to all the nav bar buttons.
-  let item = UIBarButtonItemAppearance(style: .plain)
-  item.normal.titleTextAttributes = [.foregroundColor: UIColor.white]
-  item.disabled.titleTextAttributes = [.foregroundColor: UIColor.lightText]
-  item.highlighted.titleTextAttributes = [.foregroundColor: UIColor.label]
-  item.focused.titleTextAttributes = [.foregroundColor: UIColor.white]
-  ret.buttonAppearance = item
-  ret.backButtonAppearance = item
-  ret.doneButtonAppearance = item
-
-  return ret
-}
-
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -69,14 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 #if DEBUG
     print(NSHomeDirectory())
 #endif
-
-    let navBarAppearance1 = customNavBarAppearance1()
-    // let navBarAppearance2 = customNavBarAppearance2()
-    let appearance = UINavigationBar.appearance()
-    appearance.standardAppearance = navBarAppearance1
-    appearance.compactAppearance = navBarAppearance1
-    appearance.scrollEdgeAppearance = navBarAppearance1
-    appearance.compactScrollEdgeAppearance = navBarAppearance1
 
     return true
   }
