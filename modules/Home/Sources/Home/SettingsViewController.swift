@@ -15,30 +15,83 @@ class SettingsViewController: UIViewController {
     super.viewDidLoad()
     view.backgroundColor = .lightGray
 
-    view.addSubview(imageView1)
-    imageView1.snp.remakeConstraints { make in
+
+    stackView2.addArrangedSubviews([button4])
+    view.addSubview(stackView2)
+    stackView2.snp.remakeConstraints { make in
       make.centerX.equalToSuperview()
-      make.top.equalTo(view.safeAreaLayoutGuide).offset(100)
+      make.top.equalTo(view.safeAreaLayoutGuide).offset(50)
     }
 
-    view.addSubview(imageView2)
-    imageView2.snp.remakeConstraints { make in
+    view.addSubview(label1)
+    label1.snp.remakeConstraints { make in
       make.centerX.equalToSuperview()
-      make.top.equalTo(imageView1.snp.bottom).offset(10)
+      make.top.equalTo(stackView2.snp.bottom).offset(10)
     }
 
-    view.addSubview(imageView3)
-    imageView3.snp.remakeConstraints { make in
+    view.addSubview(label2)
+    label2.snp.remakeConstraints { make in
       make.centerX.equalToSuperview()
-      make.top.equalTo(imageView2.snp.bottom).offset(10)
+      make.top.equalTo(label1.snp.bottom).offset(10)
     }
 
-    stackView.addArrangedSubviews([button1, button2, button3])
-    view.addSubview(stackView)
-    stackView.snp.remakeConstraints { make in
+
+    stackView1.addArrangedSubviews([button1, button2, button3])
+    view.addSubview(stackView1)
+    stackView1.snp.remakeConstraints { make in
       make.centerX.equalToSuperview()
       make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
     }
+
+    view.addSubview(imageView1)
+    imageView1.snp.remakeConstraints { make in
+      make.centerX.equalToSuperview()
+      make.bottom.equalTo(stackView1.snp.top).offset(-10)
+    }
+    view.addSubview(imageView2)
+    imageView2.snp.remakeConstraints { make in
+      make.centerX.equalToSuperview()
+      make.bottom.equalTo(imageView1.snp.top).offset(-10)
+    }
+    view.addSubview(imageView3)
+    imageView3.snp.remakeConstraints { make in
+      make.centerX.equalToSuperview()
+      make.bottom.equalTo(imageView2.snp.top).offset(-10)
+    }
+  }
+
+  lazy var label1: UILabel = {
+    let ret = UILabel()
+    ret.text = NSLocalizedString("test_lan", bundle: .module, comment: "")
+    return ret
+  }()
+
+  lazy var label2: UILabel = {
+    let ret = UILabel()
+    ret.text = "bbb"
+    return ret
+  }()
+
+  lazy var stackView2: UIStackView = {
+    let ret = UIStackView()
+    ret.axis = .horizontal
+    ret.alignment = .fill
+    ret.distribution = .equalSpacing
+    ret.spacing = 10
+    return ret
+  }()
+
+  lazy var button4: UIButton = {
+    let ret = UIButton(type: .system)
+    ret.tag = 1
+    ret.setTitle("go", for: .normal)
+    ret.addTarget(self, action: #selector(languageAction), for: .touchUpInside)
+    return ret
+  }()
+
+  @objc func languageAction(_ sender: UIButton) {
+    guard let url = URL(string: UIApplication.openSettingsURLString) else {return}
+    UIApplication.shared.open(url, options: [:], completionHandler: nil)
   }
 
   lazy var imageView1: UIImageView = {
@@ -62,7 +115,7 @@ class SettingsViewController: UIViewController {
     return ret
   }()
 
-  lazy var stackView: UIStackView = {
+  lazy var stackView1: UIStackView = {
     let ret = UIStackView()
     ret.axis = .horizontal
     ret.alignment = .fill

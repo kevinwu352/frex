@@ -20,6 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     print(NSHomeDirectory())
 #endif
 
+    let lan = UserDefaults.standard.value(forKey: "AppleLanguages")
+    print(lan)
+
     return true
   }
 
