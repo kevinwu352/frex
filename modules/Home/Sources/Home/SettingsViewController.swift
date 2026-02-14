@@ -16,53 +16,46 @@ class SettingsViewController: UIViewController {
     view.backgroundColor = .lightGray
 
     stackView2.addArrangedSubviews([button4])
-    view.addSubview(stackView2)
+    view.addSubviews([stackView2, label1, label2, label3, label4])
     stackView2.snp.remakeConstraints { make in
       make.centerX.equalToSuperview()
       make.top.equalTo(view.safeAreaLayoutGuide).offset(50)
     }
-
-    view.addSubview(label1)
     label1.snp.remakeConstraints { make in
       make.centerX.equalToSuperview()
       make.top.equalTo(stackView2.snp.bottom).offset(10)
     }
-
-    view.addSubview(label2)
     label2.snp.remakeConstraints { make in
       make.centerX.equalToSuperview()
       make.top.equalTo(label1.snp.bottom).offset(10)
     }
-
-    view.addSubview(label3)
     label3.snp.remakeConstraints { make in
       make.centerX.equalToSuperview()
       make.top.equalTo(label2.snp.bottom).offset(10)
     }
+    label4.snp.remakeConstraints { make in
+      make.centerX.equalToSuperview()
+      make.top.equalTo(label3.snp.bottom).offset(10)
+    }
 
     stackView1.addArrangedSubviews([button1, button2, button3])
-    view.addSubview(stackView1)
+    view.addSubviews([stackView1, imageView1, imageView2, imageView3, imageView4])
     stackView1.snp.remakeConstraints { make in
       make.centerX.equalToSuperview()
       make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
     }
-
-    view.addSubview(imageView1)
     imageView1.snp.remakeConstraints { make in
       make.centerX.equalToSuperview()
       make.bottom.equalTo(stackView1.snp.top).offset(-10)
     }
-    view.addSubview(imageView2)
     imageView2.snp.remakeConstraints { make in
       make.centerX.equalToSuperview()
       make.bottom.equalTo(imageView1.snp.top).offset(-10)
     }
-    view.addSubview(imageView3)
     imageView3.snp.remakeConstraints { make in
       make.centerX.equalToSuperview()
       make.bottom.equalTo(imageView2.snp.top).offset(-10)
     }
-    view.addSubview(imageView4)
     imageView4.snp.remakeConstraints { make in
       make.centerX.equalToSuperview()
       make.bottom.equalTo(imageView3.snp.top).offset(-10)
@@ -87,6 +80,26 @@ class SettingsViewController: UIViewController {
     ret.text = .kFirstMsg
     return ret
   }()
+
+  lazy var label4: UILabel = {
+    let ret = UILabel()
+    // 要将字符串同步到 xcstrings 文件中，直接在这里写就行了
+    // 如果有参数，写 "xxx_\("")"，这会自动生成 xxx_%@
+    //   然后在项目其它地方，就可以传真正的值，它们会使用同一个 key
+    // 如果是复数，写 "yyy_\(0)"，这会自动生成 yyy_%lld，然后在 xcstrings 文件中进行复数变换
+    //   然后在项目其它地方，就可以传真正的值，它们会使用同一个 key
+    ret.text = String(localized: "this_is_a_\("")")
+    ret.text = String(localized: "you_got_n_apple_\(0)")
+    // 两个变量的顺序，写的时候一定要写在后面，方便 key 在 xcstrings 文件中排序
+    ret.text = String(localized: "you_have_a_and_b_\("11")_\("22")")
+    return ret
+  }()
+  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesEnded(touches, with: event)
+    label4.text = String(localized: "you_got_n_apple_\(2)")
+    label4.text = String(localized: "this_is_a_\("asdf")")
+    label4.text = String(localized: "you_have_a_and_b_\("111")_\("222")")
+  }
 
   lazy var stackView2: UIStackView = {
     let ret = UIStackView()
@@ -115,6 +128,11 @@ class SettingsViewController: UIViewController {
     // 我感觉关键点是：要在 main bundle 里面生成几个 lproj 目录，才会显示切换语言的选项
     guard let url = URL(string: UIApplication.openSettingsURLString) else {return}
     UIApplication.shared.open(url, options: [:], completionHandler: nil)
+
+    // 在系统设置里修改语言后，马上能像这样拿到当前语言
+    // if let lan = UserDefaults.standard.value(forKey: "AppleLanguages") as? [String] {
+    //   label1.text = lan.first
+    // }
   }
 
   lazy var imageView1: UIImageView = {
