@@ -29,6 +29,9 @@
 			membershipExceptions = (
 				Auth,
 				CoreBase,
+				Home,
+				Line,
+				Profile,
 			);
 			target = 0A5C0C462F3300E6009DA6F1 /* frex */;
 		};
