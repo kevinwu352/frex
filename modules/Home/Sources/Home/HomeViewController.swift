@@ -35,7 +35,7 @@ public class HomeViewController: UIViewController {
 //    ret.image = UIImage(resource: .mount)
 
     ret.backgroundColor = .kTextPrimary
-    ret.image = .kFiatCloud
+    ret.image = .kFlatCloud
 //    ret.backgroundColor = UIColor(resource: .kTextPrimary11)
 //    ret.image = UIImage(resource: .kFiatCloud11)
 

@@ -62,6 +62,12 @@ class SettingsViewController: UIViewController {
       make.centerX.equalToSuperview()
       make.bottom.equalTo(imageView2.snp.top).offset(-10)
     }
+    view.addSubview(imageView4)
+    imageView4.snp.remakeConstraints { make in
+      make.centerX.equalToSuperview()
+      make.bottom.equalTo(imageView3.snp.top).offset(-10)
+      make.size.equalTo(CGSize(width: 80, height: 80))
+    }
   }
 
   lazy var label1: UILabel = {
@@ -115,20 +121,30 @@ class SettingsViewController: UIViewController {
     let ret = UIImageView()
     ret.backgroundColor = UIColor(resource: .testClr)
     ret.image = UIImage(resource: .testImg)
+    // ret.image = ImageResource.testImg.cur
     return ret
   }()
 
   lazy var imageView2: UIImageView = {
     let ret = UIImageView()
     ret.backgroundColor = UIColor(resource: .kViewBg11)
-    ret.image = UIImage(resource: .kFiatCloud11)
+    ret.image = UIImage(resource: .kFlatCloud11)
+    // ret.image = ImageResource.kFlatCloud11.cur
     return ret
   }()
 
   lazy var imageView3: UIImageView = {
     let ret = UIImageView()
     ret.backgroundColor = .kViewBg
-    ret.image = .kFiatCloud
+    ret.image = .kFlatCloud
+    return ret
+  }()
+
+  lazy var imageView4: UIImageView = {
+    let ret = UIImageView()
+    ret.backgroundColor = .kViewBg
+    ret.image = UIImage(resource: .mount)
+    // ret.image = ImageResource.mount.cur
     return ret
   }()
 
