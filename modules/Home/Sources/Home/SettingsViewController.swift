@@ -90,6 +90,13 @@ class SettingsViewController: UIViewController {
   }()
 
   @objc func languageAction(_ sender: UIButton) {
+    // 对于多语言
+    // 要在主工程里面建一个 Localizable.xcstrings
+    // 并且要添加一个条目，还要将这条打印在控制台
+    // 并且还要给这个条目增加翻译
+    // Settings 里面才会出现选择语言的选项
+    //
+    // 我感觉关键点是：要在 main bundle 里面生成几个 lproj 目录，才会显示切换语言的选项
     guard let url = URL(string: UIApplication.openSettingsURLString) else {return}
     UIApplication.shared.open(url, options: [:], completionHandler: nil)
   }
