@@ -9,6 +9,7 @@ import Foundation
 import Combine
 import CoreBase
 import Factory
+import Auth
 
 @MainActor
 final class SceneConfiger {
@@ -69,11 +70,11 @@ final class SceneConfiger {
     if let user {
       Container.shared.options.register { @MainActor in UserOptions(uid: user.username, persist: true) }
       Container.shared.network.register { HTTPClient(token: user.token) }
-//      Container.shared.usermg.register { @MainActor in UserManager(user: new) }
+      Container.shared.usermg.register { @MainActor in UserManager(user) }
     } else {
       Container.shared.options.reset(.registration)
       Container.shared.network.reset(.registration)
-//      Container.shared.usermg.reset(.registration)
+      Container.shared.usermg.reset(.registration)
     }
     Container.shared.manager.reset(scope: .session)
   }
