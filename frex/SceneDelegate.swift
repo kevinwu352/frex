@@ -32,9 +32,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     if let value = Container.shared.defaults().theme?.value {
       window?.overrideUserInterfaceStyle = value
     }
-//    let tab = UITabBarController()
-//    tab.setViewControllers(tabs(), animated: false)
-//    window?.rootViewController = tab
     window?.makeKeyAndVisible()
 
     bindEvents()
@@ -46,6 +43,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     )
     .sink { [weak self] showOnboard, logined in
       guard let self else { return }
+      print("scene, showOnboard:\(showOnboard), logined:\(logined)")
       if showOnboard {
         let vc = AuthRouter.createOnboardVc()
         let nav = NavigationController(rootViewController: vc)
@@ -53,7 +51,30 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window?.rootViewController = nav
       } else {
         if logined {
-          //
+          let item1 = UITabBarItem(title: "Home", image: .iconHomeN, selectedImage: .iconHomeH)
+          item1.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.darkGray], for: .normal)
+          item1.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.green], for: .selected)
+          let vc1 = HomeRouter.createHomeVc()
+          let nc1 = NavigationController(rootViewController: vc1)
+          nc1.isNavigationBarHidden = true
+          nc1.tabBarItem = item1
+          let item2 = UITabBarItem(title: "Line", image: .iconLineN, selectedImage: .iconLineH)
+          item2.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.darkGray], for: .normal)
+          item2.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.green], for: .selected)
+          let vc2 = LineRouter.createLineVc()
+          let nc2 = NavigationController(rootViewController: vc2)
+          nc2.isNavigationBarHidden = true
+          nc2.tabBarItem = item2
+          let item3 = UITabBarItem(title: "Profile", image: .iconProfileN, selectedImage: .iconProfileH)
+          item3.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.darkGray], for: .normal)
+          item3.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.green], for: .selected)
+          let vc3 = ProfileRouter.createProfileVc()
+          let nc3 = NavigationController(rootViewController: vc3)
+          nc3.isNavigationBarHidden = true
+          nc3.tabBarItem = item3
+          let tab = UITabBarController()
+          tab.setViewControllers([nc1, nc2, nc3], animated: false)
+          window?.rootViewController = tab
         } else {
           let vc = AuthRouter.createLoginVc()
           let nav = NavigationController(rootViewController: vc)
@@ -63,34 +84,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       }
     }
     .store(in: &bag)
-  }
-
-  func tabs() -> [UIViewController] {
-    let item1 = UITabBarItem(title: "Home", image: .iconHomeN, selectedImage: .iconHomeH)
-    item1.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.darkGray], for: .normal)
-    item1.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.green], for: .selected)
-    let vc1 = HomeRouter.createHomeVc()
-    let nc1 = NavigationController(rootViewController: vc1)
-    nc1.isNavigationBarHidden = true
-    nc1.tabBarItem = item1
-
-    let item2 = UITabBarItem(title: "Line", image: .iconLineN, selectedImage: .iconLineH)
-    item2.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.darkGray], for: .normal)
-    item2.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.green], for: .selected)
-    let vc2 = LineRouter.createLineVc()
-    let nc2 = NavigationController(rootViewController: vc2)
-    nc2.isNavigationBarHidden = true
-    nc2.tabBarItem = item2
-
-    let item3 = UITabBarItem(title: "Profile", image: .iconProfileN, selectedImage: .iconProfileH)
-    item3.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.darkGray], for: .normal)
-    item3.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.green], for: .selected)
-    let vc3 = ProfileRouter.createProfileVc()
-    let nc3 = NavigationController(rootViewController: vc3)
-    nc3.isNavigationBarHidden = true
-    nc3.tabBarItem = item3
-
-    return [nc1, nc2, nc3]
   }
 
   func sceneDidDisconnect(_ scene: UIScene) {

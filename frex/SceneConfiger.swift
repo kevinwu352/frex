@@ -66,7 +66,16 @@ final class SceneConfiger {
     logined = switcher.user != nil
   }
   func resetEnvs(_ user: User?) {
-    print("reset")
+    if let user {
+      Container.shared.options.register { @MainActor in UserOptions(uid: user.username, persist: true) }
+      Container.shared.network.register { HTTPClient(token: user.token) }
+//      Container.shared.usermg.register { @MainActor in UserManager(user: new) }
+    } else {
+      Container.shared.options.reset(.registration)
+      Container.shared.network.reset(.registration)
+//      Container.shared.usermg.reset(.registration)
+    }
+    Container.shared.manager.reset(scope: .session)
   }
 
 }
