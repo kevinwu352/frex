@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 import CoreBase
 import Factory
 import Home
@@ -13,8 +14,10 @@ import Line
 import Profile
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+  lazy var bag = Set<AnyCancellable>()
 
   var window: UIWindow?
+  let configer = SceneConfiger()
 
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -23,6 +26,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // (see `application:configurationForConnectingSceneSession` instead).
     print("scene will connect to session, window:\(window == nil ? "nil" : "some")")
     guard let scene = scene as? UIWindowScene else { return }
+
+    Publishers.CombineLatest(configer.$showOnboard, configer.$logined)
+      .sink { val in
+        print("change: \(val)")
+      }
+      .store(in: &bag)
 
     window = UIWindow(windowScene: scene)
     if let value = Container.shared.defaults().theme?.value {

@@ -43,17 +43,17 @@ public final class LoginSwitcher {
       object = user
     }
   }
-  public func loggedIn(_ user: User) {
+  public func didLogin(_ user: User) {
     if !user.username.isEmpty && !user.token.isEmpty {
-      defaults.lastUsername = user.username
-      secures.accessToken = user.token
-      user.save()
+//      defaults.lastUsername = user.username
+//      secures.accessToken = user.token
+//      user.save()
       object = user
     }
   }
-  public func loggedOut() {
-    defaults.lastUsername = nil
-    secures.accessToken = nil
+  public func logout() {
+//    defaults.lastUsername = nil
+//    secures.accessToken = nil
     object = nil
   }
 
