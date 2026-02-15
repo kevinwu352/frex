@@ -70,7 +70,7 @@ final class SceneConfiger {
     if let user {
       Container.shared.options.register { @MainActor in UserOptions(uid: user.username, persist: true) }
       Container.shared.network.register { HTTPClient(token: user.token) }
-      Container.shared.usermg.register { @MainActor in UserManager(user) }
+      Container.shared.usermg.register { @MainActor in AuthRouter.createUserManager(user) }
     } else {
       Container.shared.options.reset(.registration)
       Container.shared.network.reset(.registration)

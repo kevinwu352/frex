@@ -8,21 +8,21 @@
 import Foundation
 import CoreBase
 
-public final class UserManager: UserManaging {
-  public init(_ user: User) {
+final class UserManager: UserManaging {
+  init(_ user: User) {
     print("usermg, init, [\(user.username)]")
     self.user = user
   }
   deinit { print("usermg, deinit") }
 
-  public var user: User
+  var user: User
 
-  public func updatePhone(_ phone: String) {
+  func updatePhone(_ phone: String) {
   }
 }
 
 extension UserManager: @preconcurrency CustomStringConvertible {
-  public var description: String {
+  var description: String {
     "usermg [\(user.username)]"
   }
 }

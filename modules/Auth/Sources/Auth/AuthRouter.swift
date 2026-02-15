@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreBase
 
 @MainActor
 public struct AuthRouter {
@@ -15,5 +16,9 @@ public struct AuthRouter {
 
   public static func createLoginVc() -> UIViewController {
     LoginViewController()
+  }
+
+  public static func createUserManager(_ user: User) -> UserManaging {
+    UserManager(user)
   }
 }

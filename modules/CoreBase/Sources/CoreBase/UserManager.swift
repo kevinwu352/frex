@@ -24,12 +24,14 @@ final class UserManagerPh: UserManaging {
   init(_ user: User) {
     print("usermg, init, [mock]")
     self.user = user
+    assert(false, "should not be called")
   }
   deinit { print("usermg, deinit, [mock]") }
 
   var user: User
 
   func updatePhone(_ phone: String) {
+    user = user.copyWith(phone: phone)
   }
 }
 

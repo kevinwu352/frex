@@ -6,8 +6,8 @@
 //
 
 import UIKit
-//import CoreBase
-//import Factory
+import CoreBase
+import Factory
 import SnapKit
 
 class LoginViewController: UIViewController {
@@ -26,6 +26,12 @@ class LoginViewController: UIViewController {
     login2Btn.snp.remakeConstraints { make in
       make.centerY.equalToSuperview()
       make.leading.equalTo(view.snp.centerX).offset(10)
+    }
+
+    view.addSubview(userBtn)
+    userBtn.snp.remakeConstraints { make in
+      make.centerX.equalToSuperview()
+      make.top.equalTo(view.snp.centerY).offset(50)
     }
   }
 
@@ -47,6 +53,16 @@ class LoginViewController: UIViewController {
   }()
   @objc func loginAction(_ sender: UIButton) {
     vm.login(sender.tag)
+  }
+
+  lazy var userBtn: UIButton = {
+    let ret = UIButton(type: .system)
+    ret.setTitle("User", for: .normal)
+    ret.addTarget(self, action: #selector(userAction), for: .touchUpInside)
+    return ret
+  }()
+  @objc func userAction(_ sender: UIButton) {
+    print(Container.shared.usermg())
   }
 
 }
