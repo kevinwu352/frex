@@ -3,7 +3,7 @@ identifier_name:
     warning: 3
     error: 1
   excluded: [i, j, n, m, id, it, vc, vm]
-line_length: 140
+line_length: 180
 disabled_rules:
   - trailing_comma
   - nesting
