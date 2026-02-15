@@ -8,45 +8,17 @@
 import UIKit
 import CoreBase
 
-public class HomeViewController: UIViewController {
+class HomeViewController: UIViewController {
 
-  public override func viewDidLoad() {
+  override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .white // .white // UIColor(resource: .kViewBg)
-    navigationItem.title = "Home"
+    view.backgroundColor = .white
 
-    view.addSubview(imageView)
-    view.addSubview(label)
-  }
-  public override func viewWillLayoutSubviews() {
-    super.viewWillLayoutSubviews()
-    imageView.frame = view.bounds
-    label.sizeToFit()
-    label.center = view.center
   }
 
-  public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     super.touchesEnded(touches, with: event)
-    navigationController?.pushViewController(TestViewController(), animated: true)
+    navigationController?.pushViewController(SettingsViewController(), animated: true)
   }
-
-  lazy var imageView: UIImageView = {
-    let ret = UIImageView()
-//    ret.image = UIImage(resource: .mount)
-
-    ret.backgroundColor = .kTextPrimary
-    ret.image = .kFlatCloud
-//    ret.backgroundColor = UIColor(resource: .kTextPrimary11)
-//    ret.image = UIImage(resource: .kFiatCloud11)
-
-    return ret
-  }()
-
-  lazy var label: UILabel = {
-    let ret = UILabel()
-    ret.font = .body1
-    ret.text = "asdf"
-    return ret
-  }()
 
 }

@@ -7,9 +7,9 @@
 
 import UIKit
 
-public class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController {
 
-  public override func viewDidLoad() {
+  override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .brown
     navigationItem.title = "Profile"

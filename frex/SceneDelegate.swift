@@ -69,21 +69,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let item1 = UITabBarItem(title: "Home", image: .iconHomeN, selectedImage: .iconHomeH)
     item1.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.darkGray], for: .normal)
     item1.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.green], for: .selected)
-    let nc1 = NavigationController(rootViewController: HomeViewController())
+    let vc1 = HomeRouter.createHomeVc()
+    let nc1 = NavigationController(rootViewController: vc1)
     nc1.isNavigationBarHidden = true
     nc1.tabBarItem = item1
 
     let item2 = UITabBarItem(title: "Line", image: .iconLineN, selectedImage: .iconLineH)
     item2.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.darkGray], for: .normal)
     item2.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.green], for: .selected)
-    let nc2 = NavigationController(rootViewController: LineViewController())
+    let vc2 = LineRouter.createLineVc()
+    let nc2 = NavigationController(rootViewController: vc2)
     nc2.isNavigationBarHidden = true
     nc2.tabBarItem = item2
 
     let item3 = UITabBarItem(title: "Profile", image: .iconProfileN, selectedImage: .iconProfileH)
     item3.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.darkGray], for: .normal)
     item3.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.green], for: .selected)
-    let nc3 = NavigationController(rootViewController: ProfileViewController())
+    let vc3 = ProfileRouter.createProfileVc()
+    let nc3 = NavigationController(rootViewController: vc3)
     nc3.isNavigationBarHidden = true
     nc3.tabBarItem = item3
 

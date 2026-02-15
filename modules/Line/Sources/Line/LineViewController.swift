@@ -7,9 +7,9 @@
 
 import UIKit
 
-public class LineViewController: UIViewController {
+class LineViewController: UIViewController {
 
-  public override func viewDidLoad() {
+  override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .purple
     navigationItem.title = "Line"
