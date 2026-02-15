@@ -66,7 +66,7 @@ extension Publishers {
         _ = subscriber.receive(control[keyPath: keyPath])
       }
 
-      // deinit { Swift.print("ControlProperty, deinit") }
+      // deinit { Swift.print("control-property, deinit") }
     }
   }
 

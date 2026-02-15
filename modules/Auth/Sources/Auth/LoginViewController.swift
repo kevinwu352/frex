@@ -16,20 +16,37 @@ class LoginViewController: UIViewController {
     super.viewDidLoad()
     view.backgroundColor = .green
 
-    view.addSubview(enterBtn)
-    enterBtn.snp.remakeConstraints { make in
-      make.center.equalToSuperview()
+    view.addSubview(login1Btn)
+    login1Btn.snp.remakeConstraints { make in
+      make.centerY.equalToSuperview()
+      make.trailing.equalTo(view.snp.centerX).offset(-10)
+    }
+
+    view.addSubview(login2Btn)
+    login2Btn.snp.remakeConstraints { make in
+      make.centerY.equalToSuperview()
+      make.leading.equalTo(view.snp.centerX).offset(10)
     }
   }
 
-  lazy var enterBtn: UIButton = {
+  var vm = LoginViewModel(repo: LoginRepository())
+
+  lazy var login1Btn: UIButton = {
     let ret = UIButton(type: .system)
-    ret.setTitle("Login", for: .normal)
-    ret.addTarget(self, action: #selector(enterAction), for: .touchUpInside)
+    ret.tag = 1
+    ret.setTitle("Login-111", for: .normal)
+    ret.addTarget(self, action: #selector(loginAction), for: .touchUpInside)
     return ret
   }()
-  @objc func enterAction() {
-//    Container.shared.defaults().boardedVersion = Bundle.main.versionNumber
+  lazy var login2Btn: UIButton = {
+    let ret = UIButton(type: .system)
+    ret.tag = 2
+    ret.setTitle("Login-222", for: .normal)
+    ret.addTarget(self, action: #selector(loginAction), for: .touchUpInside)
+    return ret
+  }()
+  @objc func loginAction(_ sender: UIButton) {
+    vm.login(sender.tag)
   }
 
 }
