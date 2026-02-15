@@ -9,7 +9,6 @@ import Foundation
 import Factory
 
 extension Container {
-  @MainActor
   public var defaults: Factory<Defaults> {
     self { @MainActor in Defaults(persist: true) }.cached
   }
@@ -30,7 +29,10 @@ public final class Defaults {
       theme = Theme(rawValue: value)
     }
     language = raw.string(forKey: "language_code")
+
+    doNotChange = 0
   }
+  let doNotChange: Int
   deinit { print("defaults, deinit") }
 
   @After public var boardedVersion: String? {

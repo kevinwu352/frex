@@ -60,7 +60,7 @@ extension Publishers {
         _ = subscriber.receive()
       }
 
-      // deinit { Swift.print("ControlEvent deinit") }
+      // deinit { Swift.print("ControlEvent, deinit") }
     }
   }
 

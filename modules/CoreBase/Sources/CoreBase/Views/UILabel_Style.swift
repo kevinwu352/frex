@@ -63,7 +63,7 @@ public class StyLabel: UILabel {
                             lineSpacing: Double? = nil,
                             paragraphSpacing: (Double?, Double?)? = nil,
                             config: ((inout [NSAttributedString.Key: Any]) -> Void)? = nil
-  ) { // LABEL
+  ) {
     setTextStyles(font: { _ in font() },
                   color: { _ in color() },
                   alignment: alignment,
@@ -82,7 +82,7 @@ public class StyLabel: UILabel {
                             lineSpacing: Double? = nil,
                             paragraphSpacing: (Double?, Double?)? = nil,
                             config: ((inout [NSAttributedString.Key: Any]) -> Void)? = nil
-  ) { // LABEL
+  ) {
     reloadText = { [weak self] in
       guard let self else { return }
       let str = $0 ?? ""
@@ -129,12 +129,12 @@ public class StyLabel: UILabel {
 
   public func setMarkStyles(tags: @escaping @autoclosure () -> [String: Attrs],
                             base: @escaping @autoclosure () -> Attrs
-  ) { // LABEL
+  ) {
     setMarkStyles(tags: { _ in tags() }, base: { _ in base() })
   }
   public func setMarkStyles(tags: @escaping (String?) -> [String: Attrs],
                             base: @escaping (String?) -> Attrs
-  ) { // LABEL
+  ) {
     reloadText = nil
     reloadMark = { [weak self] in
       guard let self else { return }
@@ -183,7 +183,7 @@ public class AttLabel: AttributedLabel {
   public func setMarkStyles(tags: @escaping @autoclosure () -> [String: Attrs],
                             high: @escaping @autoclosure () -> Attrs,
                             base: @escaping @autoclosure () -> Attrs
-  ) { // LABEL
+  ) {
     setMarkStyles(tags: { _ in tags() },
                   high: { _ in high() },
                   base: { _ in base() }
@@ -193,7 +193,7 @@ public class AttLabel: AttributedLabel {
   public func setMarkStyles(tags: @escaping (String?) -> [String: Attrs],
                             high: @escaping (String?) -> Attrs,
                             base: @escaping (String?) -> Attrs
-  ) { // LABEL
+  ) {
     reloadMark = { [weak self] in
       guard let self else { return }
       let str = $0 ?? ""

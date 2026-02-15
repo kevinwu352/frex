@@ -47,7 +47,7 @@ public class StyButton: UIButton {
                 spacing: ((Status) -> Double?)? = nil,
                 alignment: ((Status) -> NSDirectionalRectEdge?)? = nil,
                 autohigh: Bool = false
-    ) { // LABEL
+    ) {
       self.image = image
       self.spacing = spacing
       self.alignment = alignment
@@ -93,7 +93,7 @@ public class StyButton: UIButton {
                 spacing: ((Status) -> Double?)? = nil,
                 alignment: ((Status) -> Configuration.TitleAlignment?)? = nil,
                 autohigh: Bool = false
-    ) { // LABEL
+    ) {
       self.str = str
       self.font = font
       self.color = color
@@ -134,7 +134,7 @@ public class StyButton: UIButton {
                 color: @escaping (Status) -> UIColor?,
                 breakMode: ((Status) -> NSLineBreakMode?)? = nil,
                 autohigh: Bool = false
-    ) { // LABEL
+    ) {
       self.str = str
       self.font = font
       self.color = color
@@ -170,7 +170,7 @@ public class StyButton: UIButton {
                 borderWidth: ((Status) -> Double?)? = nil,
                 borderColor: ((Status) -> UIColor?)? = nil,
                 autohigh: Bool = false
-    ) { // LABEL
+    ) {
       self.color = color
       self.image = image
       self.cornerRadius = cornerRadius
@@ -268,7 +268,7 @@ extension UIColor {
   }
 }
 extension UIImage {
-  fileprivate func turn(_ flag: Bool, _ insets: UIEdgeInsets?) -> UIImage { // LABEL
+  fileprivate func turn(_ flag: Bool, _ insets: UIEdgeInsets?) -> UIImage {
     (flag ? brighted(0.05) : self).inset(insets)
   }
 }

@@ -9,7 +9,6 @@ import Foundation
 import Factory
 
 extension Container {
-  @MainActor
   public var options: Factory<UserOptions> {
     self { @MainActor in UserOptions(uid: "", persist: true) }.scope(.session)
   }
@@ -23,10 +22,13 @@ public final class UserOptions {
     raw = Storage(persist ? pathmk("options.json", uid: uid.isEmpty ? "shared" : uid) : "")
 
     accountBalanceMasked = raw.bool(forKey: "account_balance_masked") ?? false
+
+    doNotChange = 0
   }
+  let doNotChange: Int
   deinit { print("options, deinit") }
 
-  public var accountBalanceMasked: Bool {
+  @After public var accountBalanceMasked: Bool {
     willSet { raw.setBool(newValue, forKey: "account_balance_masked") }
   }
 }

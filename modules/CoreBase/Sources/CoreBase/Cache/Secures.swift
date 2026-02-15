@@ -10,7 +10,6 @@ import Factory
 import KeychainSwift
 
 extension Container {
-  @MainActor
   public var secures: Factory<Secures> {
     self { @MainActor in Secures(persist: true) }.cached
   }
@@ -24,7 +23,10 @@ public final class Secures {
     raw = persist ? KeychainSwift() : nil
 
     accessToken = raw?.get("access_token")
+
+    doNotChange = 0
   }
+  let doNotChange: Int
   deinit { print("secures, deinit") }
 
   @After public var accessToken: String? {
