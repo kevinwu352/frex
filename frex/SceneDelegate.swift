@@ -9,6 +9,7 @@ import UIKit
 import Combine
 import CoreBase
 import Factory
+import Auth
 import Home
 import Line
 import Profile
@@ -27,20 +28,41 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     print("scene will connect to session, window:\(window == nil ? "nil" : "some")")
     guard let scene = scene as? UIWindowScene else { return }
 
-    Publishers.CombineLatest(configer.$showOnboard, configer.$logined)
-      .sink { val in
-        print("change: \(val)")
-      }
-      .store(in: &bag)
-
     window = UIWindow(windowScene: scene)
     if let value = Container.shared.defaults().theme?.value {
       window?.overrideUserInterfaceStyle = value
     }
-    let tab = UITabBarController()
-    tab.setViewControllers(tabs(), animated: false)
-    window?.rootViewController = tab
+//    let tab = UITabBarController()
+//    tab.setViewControllers(tabs(), animated: false)
+//    window?.rootViewController = tab
     window?.makeKeyAndVisible()
+
+    bindEvents()
+  }
+  func bindEvents() {
+    Publishers.CombineLatest(
+      configer.$showOnboard.removeDuplicates(),
+      configer.$logined.removeDuplicates()
+    )
+    .sink { [weak self] showOnboard, logined in
+      guard let self else { return }
+      if showOnboard {
+        let vc = AuthRouter.createOnboardVc()
+        let nav = NavigationController(rootViewController: vc)
+        nav.isNavigationBarHidden = true
+        self.window?.rootViewController = nav
+      } else {
+        if logined {
+          //
+        } else {
+          let vc = AuthRouter.createLoginVc()
+          let nav = NavigationController(rootViewController: vc)
+          nav.isNavigationBarHidden = true
+          self.window?.rootViewController = nav
+        }
+      }
+    }
+    .store(in: &bag)
   }
 
   func tabs() -> [UIViewController] {

@@ -36,17 +36,29 @@ public final class Defaults {
   deinit { print("defaults, deinit") }
 
   @After public var boardedVersion: String? {
-    willSet { raw.setString(newValue, forKey: "boarded_version") }
+    willSet {
+      print("defaults, boarded_version, \(String(describing: boardedVersion)) => \(String(describing: newValue))")
+      raw.setString(newValue, forKey: "boarded_version")
+    }
   }
 
   @After public var lastUsername: String? {
-    willSet { raw.setString(newValue, forKey: "last_username") }
+    willSet {
+      print("defaults, last_username, \(String(describing: lastUsername)) => \(String(describing: newValue))")
+      raw.setString(newValue, forKey: "last_username")
+    }
   }
 
   @After public var theme: Theme? {
-    willSet { raw.setString(newValue?.rawValue, forKey: "theme_code") }
+    willSet {
+      print("defaults, theme_code, \(String(describing: theme?.rawValue)) => \(String(describing: newValue?.rawValue))")
+      raw.setString(newValue?.rawValue, forKey: "theme_code")
+    }
   }
   @After public var language: String? {
-    willSet { raw.setString(newValue, forKey: "language_code") }
+    willSet {
+      print("defaults, language_code, \(String(describing: language)) => \(String(describing: newValue))")
+      raw.setString(newValue, forKey: "language_code")
+    }
   }
 }

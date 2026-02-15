@@ -21,28 +21,17 @@ final class SceneConfiger {
   init() {
     loadShowOnboard()
     loadLogined()
-    observeUserChange()
+    bindEvents()
   }
 
-  @Published var showOnboard = false
-  func loadShowOnboard() {
-    guard let current = Bundle.main.versionNumber else { return }
-    if let boarded = defaults.boardedVersion {
-      showOnboard = current.compare(boarded, options: .numeric) == .orderedDescending
-    } else {
-      showOnboard = true
-    }
-  }
-  func didOnboard() {
-    defaults.boardedVersion = Bundle.main.versionNumber
-  }
+  func bindEvents() {
+    defaults.$boardedVersion
+      .sink { [weak self] _ in
+        guard let self else { return }
+        self.resetOnboard()
+      }
+      .store(in: &bag)
 
-  @Published var logined = false
-  func loadLogined() {
-    resetEnvs(switcher.user)
-    logined = switcher.user != nil
-  }
-  func observeUserChange() {
     switcher.userPub
       .sink { [weak self] user in
         guard let self else { return }
@@ -56,6 +45,25 @@ final class SceneConfiger {
         }
       }
       .store(in: &bag)
+  }
+
+  @Published var showOnboard = false
+  func loadShowOnboard() {
+    resetOnboard()
+  }
+  func resetOnboard() {
+    guard let current = Bundle.main.versionNumber else { return }
+    if let boarded = defaults.boardedVersion {
+      showOnboard = current.compare(boarded, options: .numeric) == .orderedDescending
+    } else {
+      showOnboard = true
+    }
+  }
+
+  @Published var logined = false
+  func loadLogined() {
+    resetEnvs(switcher.user)
+    logined = switcher.user != nil
   }
   func resetEnvs(_ user: User?) {
     print("reset")

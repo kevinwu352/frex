@@ -19,6 +19,7 @@ let package = Package(
     .package(url: "https://github.com/SimplyDanny/SwiftLintPlugins.git", from: "0.63.0"),
     .package(name: "CoreBase", path: "../CoreBase"),
     .package(url: "https://github.com/hmlongco/Factory.git", from: "2.5.0"),
+    .package(url: "https://github.com/SnapKit/SnapKit.git", from: "5.7.0"),
   ],
   targets: [
     .target(
@@ -26,6 +27,7 @@ let package = Package(
       dependencies: [
         .product(name: "CoreBase", package: "CoreBase"),
         .product(name: "Factory", package: "Factory"),
+        .product(name: "SnapKit", package: "SnapKit"),
       ],
       plugins: [.plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLintPlugins")]
     ),

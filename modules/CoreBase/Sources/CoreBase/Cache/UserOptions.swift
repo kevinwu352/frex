@@ -29,6 +29,9 @@ public final class UserOptions {
   deinit { print("options, deinit") }
 
   @After public var accountBalanceMasked: Bool {
-    willSet { raw.setBool(newValue, forKey: "account_balance_masked") }
+    willSet {
+      print("options, account_balance_masked, \(accountBalanceMasked) => \(newValue)")
+      raw.setBool(newValue, forKey: "account_balance_masked")
+    }
   }
 }
