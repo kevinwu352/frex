@@ -34,9 +34,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     window?.makeKeyAndVisible()
 
-    bindEvents()
+    run()
   }
-  func bindEvents() {
+  func run() {
     Publishers.CombineLatest(
       configer.$showOnboard.removeDuplicates(),
       configer.$logined.removeDuplicates()
