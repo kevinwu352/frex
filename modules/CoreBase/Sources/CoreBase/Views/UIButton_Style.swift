@@ -27,9 +27,9 @@ public class StyButton: UIButton {
         }
       }
     }
-    public var norm: Bool { self == .normal }
-    public var high: Bool { self == .highlighted }
-    public var dis: Bool { self == .disabled }
+    public var isNormal: Bool { self == .normal }
+    public var isHighlighted: Bool { self == .highlighted }
+    public var isDisabled: Bool { self == .disabled }
   }
 
   // 系统高亮
@@ -59,9 +59,9 @@ public class StyButton: UIButton {
       if autohigh {
         if value.1 != nil {
           conf?.image = value.0
-          conf?.baseForegroundColor = value.1?.turn(status.high)
+          conf?.baseForegroundColor = value.1?.turn(status.isHighlighted)
         } else {
-          conf?.image = value.0?.turn(status.high, nil)
+          conf?.image = value.0?.turn(status.isHighlighted, nil)
         }
       } else {
         conf?.image = value.0
@@ -107,7 +107,7 @@ public class StyButton: UIButton {
     func apply(_ conf: inout Configuration?, status: Status) {
       let container = AttributeContainer([
         .font: font(status) as Any,
-        .foregroundColor: color(status)?.turn(status.high && autohigh) as Any,
+        .foregroundColor: color(status)?.turn(status.isHighlighted && autohigh) as Any,
       ])
       conf?.attributedTitle = AttributedString(str(status) ?? "", attributes: container)
       if let breakMode, let value = breakMode(status) {
@@ -147,7 +147,7 @@ public class StyButton: UIButton {
     func apply(_ conf: inout Configuration?, status: Status) {
       let container = AttributeContainer([
         .font: font(status) as Any,
-        .foregroundColor: color(status)?.turn(status.high && autohigh) as Any,
+        .foregroundColor: color(status)?.turn(status.isHighlighted && autohigh) as Any,
       ])
       conf?.attributedSubtitle = AttributedString(str(status) ?? "", attributes: container)
       if let breakMode, let value = breakMode(status) {
@@ -185,11 +185,11 @@ public class StyButton: UIButton {
     func apply(_ conf: inout Configuration?, status: Status) {
       if let color {
         let value = color(status)
-        conf?.background.backgroundColor = value?.turn(status.high && autohigh)
+        conf?.background.backgroundColor = value?.turn(status.isHighlighted && autohigh)
       }
       if let image {
         let value = image(status)
-        conf?.background.image = value.0?.turn(status.high && autohigh, value.1)
+        conf?.background.image = value.0?.turn(status.isHighlighted && autohigh, value.1)
       }
       if let cornerRadius, let value = cornerRadius(status) {
         conf?.background.cornerRadius = value

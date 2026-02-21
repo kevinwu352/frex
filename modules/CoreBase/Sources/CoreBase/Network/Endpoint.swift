@@ -16,7 +16,7 @@ public protocol Endpoint {
 }
 
 extension Endpoint {
-  func req(_ host: String, _ heads: [String: String]) throws(ReqError) -> URLRequest {
+  func req(host: String, heads: [String: String]) throws(ReqError) -> URLRequest {
     var components = URLComponents()
     components.scheme = "https"
     components.host = host
@@ -27,7 +27,7 @@ extension Endpoint {
     var request = URLRequest(url: url)
     request.httpMethod = method.rawValue
     request.allHTTPHeaderFields = heads.merging(headers ?? [:]) { $1 }
-    let ret = try encoding.value.encode(request, parameters)
+    let ret = try encoding.value.encode(request: request, parameters: parameters)
     return ret
   }
 }

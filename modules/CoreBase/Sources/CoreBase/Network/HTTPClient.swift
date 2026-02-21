@@ -60,7 +60,7 @@ public protocol Networkable: Sendable {
 extension HTTPClient: Networkable {
   public func request<T: Decodable>(_ endpoint: Endpoint, type: T.Type) async throws(ReqError) -> T {
     do {
-      let req = try endpoint.req(host, headers)
+      let req = try endpoint.req(host: host, heads: headers)
       let (data, response) = try await session.data(for: req) // server error
       guard let response = response as? HTTPURLResponse, 200...299 ~= response.statusCode else {
         throw ReqError.codeError
@@ -79,7 +79,7 @@ extension HTTPClient: Networkable {
 
   public func request<T: Decodable>(_ endpoint: Endpoint, type: T.Type) -> AnyPublisher<T, ReqError> {
     Just(endpoint)
-      .tryMap { try $0.req(host, headers) }
+      .tryMap { try $0.req(host: host, heads: headers) }
       .flatMap {
         self.session.dataTaskPublisher(for: $0) // server error
           .tryMap {
@@ -101,7 +101,7 @@ extension HTTPClient: Networkable {
 
   public func request<T: Decodable & Sendable>(_ endpoint: Endpoint, type: T.Type, completion: @escaping @Sendable (Result<T, ReqError>) -> Void) {
     do {
-      let req = try endpoint.req(host, headers)
+      let req = try endpoint.req(host: host, heads: headers)
       let task = session.dataTask(with: req) { data, response, error in
         guard error == nil else {
           completion(.failure(.serverError))

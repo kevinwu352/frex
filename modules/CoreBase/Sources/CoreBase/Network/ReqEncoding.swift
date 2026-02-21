@@ -19,14 +19,14 @@ public enum ReqEncoding {
 }
 
 protocol ParaEncoding {
-  func encode(_ request: URLRequest, _ parameters: [String: Encodable]?) throws(ReqError) -> URLRequest
+  func encode(request: URLRequest, parameters: [String: Encodable]?) throws(ReqError) -> URLRequest
 }
 
 struct URLEncoding: ParaEncoding {
 
   static let `default` = URLEncoding()
 
-  func encode(_ request: URLRequest, _ parameters: [String: Encodable]?) throws(ReqError) -> URLRequest {
+  func encode(request: URLRequest, parameters: [String: Encodable]?) throws(ReqError) -> URLRequest {
     guard let parameters else { return request }
 
     var request = request
@@ -81,7 +81,7 @@ struct JSONEncoding: ParaEncoding {
 
   static let `default` = JSONEncoding()
 
-  func encode(_ request: URLRequest, _ parameters: [String: Encodable]?) throws(ReqError) -> URLRequest {
+  func encode(request: URLRequest, parameters: [String: Encodable]?) throws(ReqError) -> URLRequest {
     guard let parameters else { return request }
 
     guard JSONSerialization.isValidJSONObject(parameters) else {
