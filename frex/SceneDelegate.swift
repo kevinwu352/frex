@@ -5,14 +5,14 @@
 //  Created by Kevin Wu on 2/4/26.
 //
 
-import UIKit
+import Auth
 import Combine
 import CoreBase
 import Factory
-import Auth
 import Home
 import Line
 import Profile
+import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   lazy var bag = Set<AnyCancellable>()

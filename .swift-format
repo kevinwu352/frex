@@ -1,0 +1,7 @@
+{
+  "lineLength" : 180,
+  "indentation": {
+    "spaces": 2
+  },
+  "spacesBeforeEndOfLineComments": 1
+}

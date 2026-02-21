@@ -5,9 +5,9 @@
 //  Created by Kevin Wu on 2/15/26.
 //
 
-import Foundation
 import Combine
 import Factory
+import Foundation
 
 extension Container {
   public var switcher: Factory<LoginSwitcher> {
@@ -37,7 +37,7 @@ public final class LoginSwitcher {
 
   func loadSavedUser() {
     if let username = defaults.lastUsername, !username.isEmpty,
-       let token = secures.accessToken, !token.isEmpty
+      let token = secures.accessToken, !token.isEmpty
     {
       let user = User.load(username: username, token: token)
       object = user

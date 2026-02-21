@@ -5,9 +5,9 @@
 //  Created by Kevin Wu on 2/15/26.
 //
 
-import Foundation
 import CoreBase
 import Factory
+import Foundation
 
 protocol LoginRepo: Sendable {
   func login(_ id: Int) async throws -> User?

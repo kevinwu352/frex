@@ -5,11 +5,11 @@
 //  Created by Kevin Wu on 2/15/26.
 //
 
-import Foundation
+import Auth
 import Combine
 import CoreBase
 import Factory
-import Auth
+import Foundation
 
 @MainActor
 final class SceneConfiger {

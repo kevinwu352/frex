@@ -5,13 +5,13 @@
 //  Created by Kevin Wu on 2/8/26.
 //
 
-import UIKit
 import Combine
+import UIKit
 
 extension UITextField {
   public var txt: AnyPublisher<String?, Never> {
     Publishers.ControlProperty(control: self, event: [.editingChanged, .editingDidEnd, .editingDidEndOnExit], keyPath: \.text)
-    .eraseToAnyPublisher()
+      .eraseToAnyPublisher()
   }
 }
 

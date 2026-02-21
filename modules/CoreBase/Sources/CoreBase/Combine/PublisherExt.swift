@@ -5,8 +5,8 @@
 //  Created by Kevin Wu on 2/6/26.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 extension Publisher where Failure == Never {
   public func toEvent(_ handler: @escaping (Output) -> Bool) -> AnyPublisher<Void, Never> {

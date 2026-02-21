@@ -33,12 +33,12 @@ import Foundation
 // TimeZone.knownTimeZoneIdentifiers
 // df.timeZone = TimeZone(identifier: "GMT")
 extension Date {
-  // 16_2450_3116
-  // 10_0000_0000     ≈ 30 years
-  // 10_0000_0000_000 ≈ 30000 years
+  // 1_624_503_116
+  // 1_000_000_000     ≈ 30 years
+  // 1_000_000_000_000 ≈ 30000 years
   public init?(timestamp: Double?) { // LABEL
     if let timestamp, timestamp > 0 {
-      self.init(timeIntervalSince1970: timestamp <= 99_9999_9999 ? timestamp : timestamp / 1000)
+      self.init(timeIntervalSince1970: timestamp <= 9_999_999_999 ? timestamp : timestamp / 1000)
     } else {
       return nil
     }

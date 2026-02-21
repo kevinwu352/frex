@@ -37,7 +37,7 @@ extension UIViewController {
 
   public var navPrev: UIViewController? {
     if let i = navigationController?.viewControllers.firstIndex(of: self),
-       let vc = navigationController?.viewControllers.at(i - 1)
+      let vc = navigationController?.viewControllers.at(i - 1)
     {
       return vc
     }
@@ -45,7 +45,7 @@ extension UIViewController {
   }
   public var navNext: UIViewController? {
     if let i = navigationController?.viewControllers.firstIndex(of: self),
-       let vc = navigationController?.viewControllers.at(i + 1)
+      let vc = navigationController?.viewControllers.at(i + 1)
     {
       return vc
     }

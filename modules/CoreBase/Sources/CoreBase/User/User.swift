@@ -26,13 +26,14 @@ public struct User: Codable, Equatable, Sendable {
     token = ""
   }
 
-  public init(id: Int,
-              name: String,
-              username: String,
-              email: String,
-              phone: String,
-              website: String,
-              token: String
+  public init(
+    id: Int,
+    name: String,
+    username: String,
+    email: String,
+    phone: String,
+    website: String,
+    token: String
   ) {
     self.id = id
     self.name = name
@@ -43,21 +44,23 @@ public struct User: Codable, Equatable, Sendable {
     self.token = token
   }
 
-  public func copyWith(id: Int? = nil,
-                       name: String? = nil,
-                       username: String? = nil,
-                       email: String? = nil,
-                       phone: String? = nil,
-                       website: String? = nil,
-                       token: String? = nil
+  public func copyWith(
+    id: Int? = nil,
+    name: String? = nil,
+    username: String? = nil,
+    email: String? = nil,
+    phone: String? = nil,
+    website: String? = nil,
+    token: String? = nil
   ) -> Self {
-    .init(id: id ?? self.id,
-          name: name ?? self.name,
-          username: username ?? self.username,
-          email: email ?? self.email,
-          phone: phone ?? self.phone,
-          website: website ?? self.website,
-          token: token ?? self.token
+    .init(
+      id: id ?? self.id,
+      name: name ?? self.name,
+      username: username ?? self.username,
+      email: email ?? self.email,
+      phone: phone ?? self.phone,
+      website: website ?? self.website,
+      token: token ?? self.token
     )
   }
 }
@@ -91,20 +94,22 @@ extension User {
 }
 
 extension User {
-  public static let kevin = User(id: 1,
-                                 name: "Kevin",
-                                 username: "kevin110",
-                                 email: "kevin@gmail.com",
-                                 phone: "13500001111",
-                                 website: "kevin.com",
-                                 token: "token111"
+  public static let kevin = User(
+    id: 1,
+    name: "Kevin",
+    username: "kevin110",
+    email: "kevin@gmail.com",
+    phone: "13500001111",
+    website: "kevin.com",
+    token: "token111"
   )
-  public static let eric = User(id: 1,
-                                name: "Eric",
-                                username: "eric110",
-                                email: "eric@gmail.com",
-                                phone: "13500002222",
-                                website: "eric.com",
-                                token: "token222"
+  public static let eric = User(
+    id: 1,
+    name: "Eric",
+    username: "eric110",
+    email: "eric@gmail.com",
+    phone: "13500002222",
+    website: "eric.com",
+    token: "token222"
   )
 }

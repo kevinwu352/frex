@@ -7,13 +7,13 @@ let package = Package(
   name: "Auth",
   defaultLocalization: "en",
   platforms: [
-    .iOS(.v17),
+    .iOS(.v17)
   ],
   products: [
     .library(
       name: "Auth",
       targets: ["Auth"]
-    ),
+    )
   ],
   dependencies: [
     .package(url: "https://github.com/SimplyDanny/SwiftLintPlugins.git", from: "0.63.0"),

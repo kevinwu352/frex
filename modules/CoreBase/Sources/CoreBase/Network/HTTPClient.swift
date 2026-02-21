@@ -5,9 +5,9 @@
 //  Created by Kevin Wu on 2/15/26.
 //
 
-import Foundation
 import Combine
 import Factory
+import Foundation
 
 extension Container {
   public var network: Factory<Networkable> {

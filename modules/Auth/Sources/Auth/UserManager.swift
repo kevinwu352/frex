@@ -5,8 +5,8 @@
 //  Created by Kevin Wu on 2/15/26.
 //
 
-import Foundation
 import CoreBase
+import Foundation
 
 final class UserManager: UserManaging {
   init(_ user: User) {

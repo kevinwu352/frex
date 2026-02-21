@@ -5,8 +5,8 @@
 //  Created by Kevin Wu on 2/13/26.
 //
 
-import UIKit
 import CoreImage.CIFilterBuiltins
+import UIKit
 
 public class StyButton: UIButton {
 
@@ -43,10 +43,11 @@ public class StyButton: UIButton {
     public var spacing: ((Status) -> Double?)?
     public var alignment: ((Status) -> NSDirectionalRectEdge?)?
     public var autohigh = false
-    public init(image: @escaping (Status) -> (UIImage?, UIColor?),
-                spacing: ((Status) -> Double?)? = nil,
-                alignment: ((Status) -> NSDirectionalRectEdge?)? = nil,
-                autohigh: Bool = false
+    public init(
+      image: @escaping (Status) -> (UIImage?, UIColor?),
+      spacing: ((Status) -> Double?)? = nil,
+      alignment: ((Status) -> NSDirectionalRectEdge?)? = nil,
+      autohigh: Bool = false
     ) {
       self.image = image
       self.spacing = spacing
@@ -86,13 +87,14 @@ public class StyButton: UIButton {
     public var spacing: ((Status) -> Double?)?
     public var alignment: ((Status) -> Configuration.TitleAlignment?)?
     public var autohigh = false
-    public init(str: @escaping (Status) -> String?,
-                font: @escaping (Status) -> UIFont?,
-                color: @escaping (Status) -> UIColor?,
-                breakMode: ((Status) -> NSLineBreakMode?)? = nil,
-                spacing: ((Status) -> Double?)? = nil,
-                alignment: ((Status) -> Configuration.TitleAlignment?)? = nil,
-                autohigh: Bool = false
+    public init(
+      str: @escaping (Status) -> String?,
+      font: @escaping (Status) -> UIFont?,
+      color: @escaping (Status) -> UIColor?,
+      breakMode: ((Status) -> NSLineBreakMode?)? = nil,
+      spacing: ((Status) -> Double?)? = nil,
+      alignment: ((Status) -> Configuration.TitleAlignment?)? = nil,
+      autohigh: Bool = false
     ) {
       self.str = str
       self.font = font
@@ -129,11 +131,12 @@ public class StyButton: UIButton {
     public var color: (Status) -> UIColor?
     public var breakMode: ((Status) -> NSLineBreakMode?)?
     public var autohigh = false
-    public init(str: @escaping (Status) -> String?,
-                font: @escaping (Status) -> UIFont?,
-                color: @escaping (Status) -> UIColor?,
-                breakMode: ((Status) -> NSLineBreakMode?)? = nil,
-                autohigh: Bool = false
+    public init(
+      str: @escaping (Status) -> String?,
+      font: @escaping (Status) -> UIFont?,
+      color: @escaping (Status) -> UIColor?,
+      breakMode: ((Status) -> NSLineBreakMode?)? = nil,
+      autohigh: Bool = false
     ) {
       self.str = str
       self.font = font
@@ -164,12 +167,13 @@ public class StyButton: UIButton {
     public var borderWidth: ((Status) -> Double?)?
     public var borderColor: ((Status) -> UIColor?)?
     public var autohigh = false
-    public init(color: ((Status) -> UIColor?)? = nil,
-                image: ((Status) -> (UIImage?, UIEdgeInsets?))? = nil,
-                cornerRadius: ((Status) -> Double?)? = nil,
-                borderWidth: ((Status) -> Double?)? = nil,
-                borderColor: ((Status) -> UIColor?)? = nil,
-                autohigh: Bool = false
+    public init(
+      color: ((Status) -> UIColor?)? = nil,
+      image: ((Status) -> (UIImage?, UIEdgeInsets?))? = nil,
+      cornerRadius: ((Status) -> Double?)? = nil,
+      borderWidth: ((Status) -> Double?)? = nil,
+      borderColor: ((Status) -> UIColor?)? = nil,
+      autohigh: Bool = false
     ) {
       self.color = color
       self.image = image
@@ -280,7 +284,7 @@ extension UIImage {
     filter.inputImage = CIImage(image: self)
     filter.brightness = Float(val)
     if let ciimg = filter.outputImage,
-       let cgimg = CIContext(options: nil).createCGImage(ciimg, from: ciimg.extent)
+      let cgimg = CIContext(options: nil).createCGImage(ciimg, from: ciimg.extent)
     {
       let img = UIImage(cgImage: cgimg, scale: scale, orientation: .up)
       return img
@@ -299,13 +303,13 @@ extension UIImage {
 extension UIControl.State {
   fileprivate var name: String {
     switch self {
-    case .normal: "normal"              // 0
-    case .highlighted: "highlighted"    // 1
-    case .disabled: "disabled"          // 2
-    case .selected: "selected"          // 4
-    case .focused: "focused"            // 8
-    case .application: "application"    // 16711680
-    case .reserved: "reserved"          // 4278190080
+    case .normal: "normal" // 0
+    case .highlighted: "highlighted" // 1
+    case .disabled: "disabled" // 2
+    case .selected: "selected" // 4
+    case .focused: "focused" // 8
+    case .application: "application" // 16711680
+    case .reserved: "reserved" // 4278190080
     default: "unknown \(rawValue)"
     }
   }

@@ -7,6 +7,7 @@
 
 import Foundation
 import Testing
+
 @testable import CoreBase
 
 struct CodecTests {
@@ -131,10 +132,12 @@ struct CodecTests {
     #expect(CFNumberGetType(map["dd"] as? NSNumber).rawValue == CFNumberType.float64Type.rawValue)
     #expect(CFNumberGetType(map["id1"] as? NSNumber).rawValue == CFNumberType.float64Type.rawValue)
     #expect(CFNumberGetType(map["id2"] as? NSNumber).rawValue == CFNumberType.float64Type.rawValue)
-    #expect([CFNumberType.sInt8Type, .sInt16Type, .sInt32Type, .sInt64Type, .intType, .longType, .longLongType, .charType, .shortType, .nsIntegerType].contains(CFNumberGetType(map["ii"] as? NSNumber)))
-    #expect([CFNumberType.floatType, .float32Type, .float64Type, .doubleType, .cgFloatType].contains(CFNumberGetType(map["dd"] as? NSNumber)))
-    #expect([CFNumberType.floatType, .float32Type, .float64Type, .doubleType, .cgFloatType].contains(CFNumberGetType(map["id1"] as? NSNumber)))
-    #expect([CFNumberType.floatType, .float32Type, .float64Type, .doubleType, .cgFloatType].contains(CFNumberGetType(map["id2"] as? NSNumber)))
+    let ints: [CFNumberType] = [.sInt8Type, .sInt16Type, .sInt32Type, .sInt64Type, .intType, .longType, .longLongType, .charType, .shortType, .nsIntegerType]
+    #expect(ints.contains(CFNumberGetType(map["ii"] as? NSNumber)))
+    let doubles: [CFNumberType] = [.floatType, .float32Type, .float64Type, .doubleType, .cgFloatType]
+    #expect(doubles.contains(CFNumberGetType(map["dd"] as? NSNumber)))
+    #expect(doubles.contains(CFNumberGetType(map["id1"] as? NSNumber)))
+    #expect(doubles.contains(CFNumberGetType(map["id2"] as? NSNumber)))
   }
 
 }

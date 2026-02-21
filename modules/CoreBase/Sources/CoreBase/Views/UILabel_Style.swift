@@ -5,9 +5,9 @@
 //  Created by Kevin Wu on 2/13/26.
 //
 
-import UIKit
 import Atributika
 import AtributikaViews
+import UIKit
 
 public class StyLabel: UILabel {
 
@@ -55,33 +55,36 @@ public class StyLabel: UILabel {
 
   public var reloadText: ((String?) -> Void)?
 
-  public func setTextStyles(font: @escaping @autoclosure () -> UIFont?,
-                            color: @escaping @autoclosure () -> UIColor?,
-                            alignment: NSTextAlignment = .left,
-                            breakMode: NSLineBreakMode = .byWordWrapping,
-                            lineHeight: Double? = nil,
-                            lineSpacing: Double? = nil,
-                            paragraphSpacing: (Double?, Double?)? = nil,
-                            config: ((inout [NSAttributedString.Key: Any]) -> Void)? = nil
+  public func setTextStyles(
+    font: @escaping @autoclosure () -> UIFont?,
+    color: @escaping @autoclosure () -> UIColor?,
+    alignment: NSTextAlignment = .left,
+    breakMode: NSLineBreakMode = .byWordWrapping,
+    lineHeight: Double? = nil,
+    lineSpacing: Double? = nil,
+    paragraphSpacing: (Double?, Double?)? = nil,
+    config: ((inout [NSAttributedString.Key: Any]) -> Void)? = nil
   ) {
-    setTextStyles(font: { _ in font() },
-                  color: { _ in color() },
-                  alignment: alignment,
-                  breakMode: breakMode,
-                  lineHeight: lineHeight,
-                  lineSpacing: lineSpacing,
-                  paragraphSpacing: paragraphSpacing,
-                  config: config
+    setTextStyles(
+      font: { _ in font() },
+      color: { _ in color() },
+      alignment: alignment,
+      breakMode: breakMode,
+      lineHeight: lineHeight,
+      lineSpacing: lineSpacing,
+      paragraphSpacing: paragraphSpacing,
+      config: config
     )
   }
-  public func setTextStyles(font: @escaping (String?) -> UIFont?,
-                            color: @escaping (String?) -> UIColor?,
-                            alignment: NSTextAlignment = .left,
-                            breakMode: NSLineBreakMode = .byWordWrapping,
-                            lineHeight: Double? = nil,
-                            lineSpacing: Double? = nil,
-                            paragraphSpacing: (Double?, Double?)? = nil,
-                            config: ((inout [NSAttributedString.Key: Any]) -> Void)? = nil
+  public func setTextStyles(
+    font: @escaping (String?) -> UIFont?,
+    color: @escaping (String?) -> UIColor?,
+    alignment: NSTextAlignment = .left,
+    breakMode: NSLineBreakMode = .byWordWrapping,
+    lineHeight: Double? = nil,
+    lineSpacing: Double? = nil,
+    paragraphSpacing: (Double?, Double?)? = nil,
+    config: ((inout [NSAttributedString.Key: Any]) -> Void)? = nil
   ) {
     reloadText = { [weak self] in
       guard let self else { return }
@@ -127,19 +130,22 @@ public class StyLabel: UILabel {
 
   public var reloadMark: ((String?) -> Void)?
 
-  public func setMarkStyles(tags: @escaping @autoclosure () -> [String: Attrs],
-                            base: @escaping @autoclosure () -> Attrs
+  public func setMarkStyles(
+    tags: @escaping @autoclosure () -> [String: Attrs],
+    base: @escaping @autoclosure () -> Attrs
   ) {
     setMarkStyles(tags: { _ in tags() }, base: { _ in base() })
   }
-  public func setMarkStyles(tags: @escaping (String?) -> [String: Attrs],
-                            base: @escaping (String?) -> Attrs
+  public func setMarkStyles(
+    tags: @escaping (String?) -> [String: Attrs],
+    base: @escaping (String?) -> Attrs
   ) {
     reloadText = nil
     reloadMark = { [weak self] in
       guard let self else { return }
       let str = $0 ?? ""
-      self.attributedText = str
+      self.attributedText =
+        str
         .style(tags: self.tags?() ?? tags(str))
         .styleBase(self.base?() ?? base(str))
         .attributedString
@@ -180,19 +186,22 @@ public class AttLabel: AttributedLabel {
 
   public var reloadMark: ((String?) -> Void)?
 
-  public func setMarkStyles(tags: @escaping @autoclosure () -> [String: Attrs],
-                            high: @escaping @autoclosure () -> Attrs,
-                            base: @escaping @autoclosure () -> Attrs
+  public func setMarkStyles(
+    tags: @escaping @autoclosure () -> [String: Attrs],
+    high: @escaping @autoclosure () -> Attrs,
+    base: @escaping @autoclosure () -> Attrs
   ) {
-    setMarkStyles(tags: { _ in tags() },
-                  high: { _ in high() },
-                  base: { _ in base() }
+    setMarkStyles(
+      tags: { _ in tags() },
+      high: { _ in high() },
+      base: { _ in base() }
     )
   }
   // a, @, #
-  public func setMarkStyles(tags: @escaping (String?) -> [String: Attrs],
-                            high: @escaping (String?) -> Attrs,
-                            base: @escaping (String?) -> Attrs
+  public func setMarkStyles(
+    tags: @escaping (String?) -> [String: Attrs],
+    high: @escaping (String?) -> Attrs,
+    base: @escaping (String?) -> Attrs
   ) {
     reloadMark = { [weak self] in
       guard let self else { return }
@@ -207,7 +216,8 @@ public class AttLabel: AttributedLabel {
           Attrs(link).akaLink($0.tag.attributes["href"] ?? "")
         }
       }
-      var asb = str
+      var asb =
+        str
         .style(tags: tags)
       // .styleLinks(dt)
       // .styleMentions(dt)
@@ -225,7 +235,8 @@ public class AttLabel: AttributedLabel {
         let tuner = DetectionTuner { Attrs(hashtag).akaLink($0.text) }
         asb = asb.styleHashtags(tuner)
       }
-      self.attributedText = asb
+      self.attributedText =
+        asb
         .styleBase(self.base?() ?? base(str))
         .attributedString
     }

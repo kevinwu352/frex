@@ -7,13 +7,13 @@ let package = Package(
   name: "Home",
   defaultLocalization: "en",
   platforms: [
-    .iOS(.v17),
+    .iOS(.v17)
   ],
   products: [
     .library(
       name: "Home",
       targets: ["Home"]
-    ),
+    )
   ],
   dependencies: [
     .package(url: "https://github.com/SimplyDanny/SwiftLintPlugins.git", from: "0.63.0"),
@@ -30,8 +30,7 @@ let package = Package(
         .product(name: "SnapKit", package: "SnapKit"),
       ],
       plugins: [.plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLintPlugins")],
-    ),
+    )
 
   ]
 )
-

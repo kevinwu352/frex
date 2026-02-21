@@ -5,9 +5,9 @@
 //  Created by Kevin Wu on 2/14/26.
 //
 
-import UIKit
 import CoreBase
 import Factory
+import UIKit
 
 class SettingsViewController: UIViewController {
 
@@ -126,7 +126,7 @@ class SettingsViewController: UIViewController {
     // Settings 里面才会出现选择语言的选项
     //
     // 我感觉关键点是：要在 main bundle 里面生成几个 lproj 目录，才会显示切换语言的选项
-    guard let url = URL(string: UIApplication.openSettingsURLString) else {return}
+    guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
     UIApplication.shared.open(url, options: [:], completionHandler: nil)
 
     // 在系统设置里修改语言后，马上能像这样拿到当前语言
@@ -208,13 +208,13 @@ class SettingsViewController: UIViewController {
     if sender.tag == 1 {
       Container.shared.defaults().theme = .day
       view.window?.overrideUserInterfaceStyle = .light
-//      view.overrideUserInterfaceStyle = .light
-//      overrideUserInterfaceStyle = .light
+      // view.overrideUserInterfaceStyle = .light
+      // overrideUserInterfaceStyle = .light
     } else if sender.tag == 2 {
       view.window?.overrideUserInterfaceStyle = .dark
       Container.shared.defaults().theme = .night
-//      view.overrideUserInterfaceStyle = .dark
-//      overrideUserInterfaceStyle = .dark
+      // view.overrideUserInterfaceStyle = .dark
+      // overrideUserInterfaceStyle = .dark
     } else {
       view.window?.overrideUserInterfaceStyle = .unspecified
       Container.shared.defaults().theme = nil
