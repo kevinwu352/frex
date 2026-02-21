@@ -8,6 +8,13 @@
 import Foundation
 
 extension String {
+  public var url: URL? {
+    URL(string: self)
+  }
+  public var furl: URL {
+    URL(fileURLWithPath: self)
+  }
+
   public func prefixed(_ str: String?, _ sep: String? = nil) -> String { // LABEL
     if let str, !str.isEmpty {
       return str + (sep ?? "") + self

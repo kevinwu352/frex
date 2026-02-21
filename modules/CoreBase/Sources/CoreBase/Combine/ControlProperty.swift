@@ -9,6 +9,9 @@ import Combine
 import UIKit
 
 extension UITextField {
+  // .editingChanged
+  // .editingDidEnd 任何原因导致编辑终止
+  // .editingDidEndOnExit 用户点击软键盘上的回车键，如果通过 addTarget 添加了响应，就算响应为空，也会自动收起键盘
   public var txt: AnyPublisher<String?, Never> {
     Publishers.ControlProperty(control: self, event: [.editingChanged, .editingDidEnd, .editingDidEndOnExit], keyPath: \.text)
       .eraseToAnyPublisher()

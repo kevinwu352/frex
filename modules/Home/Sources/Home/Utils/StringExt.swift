@@ -17,6 +17,7 @@ import Foundation
 //
 // 新项目一定要用这个，这东西更新的比较好，如果我修改了某条，它会会删旧的加新的
 //   String(localized: "")
+// 此方法的 local 参数并不是指定我想要的语言，而是数字格式，系统查找语言还是自己原有的逻辑
 extension String {
   init(localized keyAndValue: String.LocalizationValue) {
     self.init(localized: keyAndValue, bundle: .module)
