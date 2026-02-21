@@ -16,4 +16,10 @@ public enum Theme: String {
     case .night: .dark
     }
   }
+  public var name: String {
+    switch self {
+    case .day: "day"
+    case .night: "night"
+    }
+  }
 }
