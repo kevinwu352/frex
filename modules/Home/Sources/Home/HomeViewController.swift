@@ -18,7 +18,7 @@ class HomeViewController: UIViewController {
 
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     super.touchesEnded(touches, with: event)
-    navigationController?.pushViewController(UserViewController(), animated: true)
+    navigationController?.pushViewController(RefreshViewController(), animated: true)
   }
 
 }

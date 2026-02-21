@@ -227,6 +227,7 @@ public class StyButton: UIButton {
   }
 
   @objc func style() {
+    NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(style), object: nil)
     configurationUpdateHandler = {
       guard let btn = $0 as? StyButton else { return }
       var conf = $0.configuration

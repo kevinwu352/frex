@@ -16,11 +16,12 @@ let package = Package(
     )
   ],
   dependencies: [
-    .package(url: "https://github.com/hmlongco/Factory.git", from: "2.5.0"),
     .package(url: "https://github.com/evgenyneu/keychain-swift.git", from: "24.0.0"),
-    .package(url: "https://github.com/SnapKit/SnapKit.git", from: "5.7.0"),
     .package(url: "https://github.com/kevinwu352/SwiftEntryKit.git", branch: "dev"),
     .package(url: "https://github.com/psharanda/Atributika.git", from: "5.0.0"),
+    .package(url: "https://github.com/CoderMJLee/MJRefresh.git", from: "3.7.0"),
+    .package(url: "https://github.com/hmlongco/Factory.git", from: "2.5.0"),
+    .package(url: "https://github.com/SnapKit/SnapKit.git", from: "5.7.0"),
   ],
   targets: [
     .target(
@@ -32,6 +33,7 @@ let package = Package(
         .product(name: "SwiftEntryKit", package: "SwiftEntryKit"),
         .product(name: "Atributika", package: "Atributika"),
         .product(name: "AtributikaViews", package: "Atributika"),
+        .product(name: "MJRefresh", package: "MJRefresh"),
       ],
       // swiftSettings: [.defaultIsolation(MainActor.self)],
     ),
