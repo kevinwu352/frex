@@ -5,10 +5,12 @@
 //  Created by Kevin Wu on 2/14/26.
 //
 
+import Combine
 import CoreBase
 import UIKit
 
 class HomeViewController: UIViewController {
+  lazy var bag = Set<AnyCancellable>()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -18,7 +20,7 @@ class HomeViewController: UIViewController {
 
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     super.touchesEnded(touches, with: event)
-    navigationController?.pushViewController(RefreshViewController(), animated: true)
+    // navigationController?.pushViewController(RefreshViewController(), animated: true)
   }
 
 }
